@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:irle_ref2/pages/detail_materi_page.dart';
+import 'package:irle_ref2/pages/home/main_page.dart';
 import 'package:irle_ref2/pages/onboarding_page.dart';
 import 'package:irle_ref2/pages/sign_in_page.dart';
 import 'package:irle_ref2/pages/sign_up_page.dart';
@@ -20,6 +22,8 @@ class MyApp extends StatelessWidget {
         '/onboarding': (context) => OnboardingPage(),
         '/sign-in': (context) => SignInPage(),
         '/sign-up': (context) => SignUpPage(),
+        '/main-page': (context) => MainPage(),
+        '/detail-materi': (context) => DetailMateriPage(),
       },
     );
   }

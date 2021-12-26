@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:irle_ref2/pages/home/materi_page.dart';
 import 'package:irle_ref2/theme.dart';
 
 class MainPage extends StatefulWidget {
   // const MainPage({ Key? key }) : super(key: key);
-  final String username;
-  MainPage(this.username);
   @override
   _MainPageState createState() => _MainPageState();
 }
@@ -78,7 +77,7 @@ class _MainPageState extends State<MainPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Hello! ${widget.username}",
+          Text("Hello! }",
               style: titleTextStyle.copyWith(
                   fontSize: 18, fontWeight: FontWeight.w100)),
           Text("wellcome",
@@ -92,7 +91,7 @@ class _MainPageState extends State<MainPage> {
   Widget body() {
     switch (indexPage) {
       case 0:
-        return Center(child: Text("halaman materi", style: textStyle1));
+        return MateriPage();
         break;
       case 1:
         return Center(child: Text("halaman kosa kata", style: textStyle1));

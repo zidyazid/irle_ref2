@@ -13,8 +13,9 @@ class SignUpPage extends StatefulWidget {
   _SignUpPageState createState() => _SignUpPageState();
 }
 
-TextEditingController fullnameController = TextEditingController();
+TextEditingController nameController = TextEditingController();
 TextEditingController usernameController = TextEditingController();
+TextEditingController emailController = TextEditingController();
 TextEditingController passwordController = TextEditingController();
 var userUsername;
 var userPassword;
@@ -50,7 +51,7 @@ class _SignUpPageState extends State<SignUpPage> {
       );
     }
 
-    Widget inputFullname() {
+    Widget inputName() {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -69,7 +70,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 borderRadius: BorderRadius.circular(24)),
             child: Center(
               child: TextField(
-                controller: fullnameController,
+                controller: nameController,
                 decoration: InputDecoration.collapsed(
                   hintText: "Fullname",
                   hintStyle: subTitleTextStyle.copyWith(color: darkGrey),
@@ -177,7 +178,7 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
           Column(
             children: [
-              inputFullname(),
+              inputName(),
               SizedBox(
                 height: 12,
               ),

@@ -126,7 +126,10 @@ class _SignInPageState extends State<SignInPage> {
                 backgroundColor: blueColor,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(24))),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamedAndRemoveUntil(
+                  context, '/main-page', (route) => false);
+            },
             child: Text(
               "next",
               style:
