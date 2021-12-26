@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:irle_ref2/models/user_model.dart';
-// import 'package:irle_ref2/services/auth_service.dart';
+import 'package:irle_ref2/providers/auth_provider.dart';
 import 'package:irle_ref2/theme.dart';
-import 'package:top_snackbar_flutter/custom_snack_bar.dart';
-import 'package:top_snackbar_flutter/tap_bounce_container.dart';
-import 'package:top_snackbar_flutter/top_snack_bar.dart';
+import 'package:provider/provider.dart';
+// import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+// import 'package:top_snackbar_flutter/tap_bounce_container.dart';
+// import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class SignUpPage extends StatefulWidget {
   // const SignUpPage({ Key? key }) : super(key: key);
@@ -14,17 +14,28 @@ class SignUpPage extends StatefulWidget {
 }
 
 TextEditingController nameController = TextEditingController();
-TextEditingController usernameController = TextEditingController();
 TextEditingController emailController = TextEditingController();
+TextEditingController usernameController = TextEditingController();
 TextEditingController passwordController = TextEditingController();
 var userUsername;
 var userPassword;
-var _user = UserModel();
-// var _authService = AuthService();
 
 class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+
+    handleSignUp() async {
+      if (await authProvider.register(
+          name: nameController.text,
+          username: usernameController.text,
+          email: emailController.text,
+          password: passwordController.text)) {
+        Navigator.pushNamedAndRemoveUntil(
+            context, '/main-page', (route) => false);
+      }
+    }
+
     Widget header() {
       return Container(
         padding: EdgeInsets.only(top: 30),
@@ -51,7 +62,7 @@ class _SignUpPageState extends State<SignUpPage> {
       );
     }
 
-    Widget inputName() {
+    Widget inputFullname() {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -73,6 +84,37 @@ class _SignUpPageState extends State<SignUpPage> {
                 controller: nameController,
                 decoration: InputDecoration.collapsed(
                   hintText: "Fullname",
+                  hintStyle: subTitleTextStyle.copyWith(color: darkGrey),
+                ),
+              ),
+            ),
+          ),
+        ],
+      );
+    }
+
+    Widget inputEmail() {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+              padding: EdgeInsets.symmetric(horizontal: 3),
+              child: Text("Email",
+                  style: subTitleTextStyle.copyWith(color: darkGrey))),
+          SizedBox(
+            height: 8,
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 30),
+            height: 60,
+            decoration: BoxDecoration(
+                border: Border.all(color: darkGrey),
+                borderRadius: BorderRadius.circular(24)),
+            child: Center(
+              child: TextField(
+                controller: emailController,
+                decoration: InputDecoration.collapsed(
+                  hintText: "Email",
                   hintStyle: subTitleTextStyle.copyWith(color: darkGrey),
                 ),
               ),
@@ -158,7 +200,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   backgroundColor: blueColor,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(24))),
-              onPressed: () {},
+              onPressed: handleSignUp,
               child: Text(
                 "Register",
                 style:
@@ -178,7 +220,11 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
           Column(
             children: [
-              inputName(),
+              inputFullname(),
+              SizedBox(
+                height: 12,
+              ),
+              inputEmail(),
               SizedBox(
                 height: 12,
               ),
