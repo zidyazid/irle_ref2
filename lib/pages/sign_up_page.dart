@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:irle_ref2/models/user_model.dart';
-import 'package:irle_ref2/services/auth_service.dart';
+// import 'package:irle_ref2/services/auth_service.dart';
 import 'package:irle_ref2/theme.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/tap_bounce_container.dart';
@@ -19,7 +19,7 @@ TextEditingController passwordController = TextEditingController();
 var userUsername;
 var userPassword;
 var _user = UserModel();
-var _authService = AuthService();
+// var _authService = AuthService();
 
 class _SignUpPageState extends State<SignUpPage> {
   @override
@@ -157,36 +157,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   backgroundColor: blueColor,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(24))),
-              onPressed: () async {
-                _user.namalengkap = fullnameController.text;
-                _user.username = usernameController.text;
-                _user.password = passwordController.text;
-
-                // var result = await _authService.userRegistration(_user);
-                // print(result);
-                userUsername = usernameController.text;
-                userPassword = passwordController.text;
-                var result = await _authService.getDataByUsername(userUsername);
-                print(result);
-                if (result == true) {
-                  showTopSnackBar(
-                    context,
-                    CustomSnackBar.error(
-                      message: "Pendaftaran Gagal",
-                    ),
-                  );
-                } else {
-                  var result = await _authService.userRegistration(_user);
-                  print(result);
-                  showTopSnackBar(
-                    context,
-                    CustomSnackBar.success(
-                      message: "Pendaftaran Berhasil",
-                    ),
-                  );
-                  Navigator.pushNamed(context, '/sign-in');
-                }
-              },
+              onPressed: () {},
               child: Text(
                 "Register",
                 style:

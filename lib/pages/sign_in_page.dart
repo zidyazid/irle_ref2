@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:irle_ref2/models/user_model.dart';
 import 'package:irle_ref2/pages/home/main_page.dart';
-import 'package:irle_ref2/services/auth_service.dart';
+// import 'package:irle_ref2/services/auth_service.dart';
 import 'package:irle_ref2/theme.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/tap_bounce_container.dart';
@@ -20,7 +20,7 @@ TextEditingController passwordController = TextEditingController();
 var userUsername;
 var userPassword;
 var _user = UserModel();
-var _authService = AuthService();
+// var _authService = AuthService();
 
 class _SignInPageState extends State<SignInPage> {
   @override
@@ -126,39 +126,7 @@ class _SignInPageState extends State<SignInPage> {
                 backgroundColor: blueColor,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(24))),
-            onPressed: () async {
-              _user.username = usernameController.text;
-              _user.password = passwordController.text;
-
-              userUsername = usernameController.text;
-              userPassword = passwordController.text;
-
-              var result =
-                  await _authService.userLoginAuth(userUsername, userPassword);
-
-              print(result);
-
-              if (result == false) {
-                showTopSnackBar(
-                  context,
-                  CustomSnackBar.error(
-                    message: "Login Gagal",
-                  ),
-                );
-              } else {
-                showTopSnackBar(
-                  context,
-                  CustomSnackBar.success(
-                    message: "Login Berhasil",
-                  ),
-                );
-                print(result[0]["username"]);
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => MainPage(result[0]["username"])));
-              }
-            },
+            onPressed: () {},
             child: Text(
               "next",
               style:
