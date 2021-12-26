@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:irle_ref2/pages/home/kosa_kata_page.dart';
 import 'package:irle_ref2/pages/home/materi_page.dart';
 import 'package:irle_ref2/theme.dart';
 
@@ -94,7 +95,7 @@ class _MainPageState extends State<MainPage> {
         return MateriPage();
         break;
       case 1:
-        return Center(child: Text("halaman kosa kata", style: textStyle1));
+        return KosaKataPage();
         break;
       case 2:
         return Center(child: Text("halaman status", style: textStyle1));

@@ -57,6 +57,20 @@ class DetailMateriPage extends StatelessWidget {
               style: textStyle1.copyWith(color: Colors.black),
               textAlign: TextAlign.justify,
             ),
+            SizedBox(height: 24),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TextButton(
+                    style: TextButton.styleFrom(
+                        backgroundColor: blueColor, elevation: 1.0),
+                    onPressed: () {},
+                    child: Text(
+                      "Kuis",
+                      style: subTitleTextStyle.copyWith(color: whiteColor),
+                    )),
+              ],
+            )
           ],
         ),
       ),
