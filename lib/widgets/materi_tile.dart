@@ -3,6 +3,11 @@ import 'package:irle_ref2/theme.dart';
 
 class MateriTile extends StatelessWidget {
   // const MateriTile({ Key? key }) : super(key: key);
+  final String judul;
+  final String name;
+  final String desc;
+
+  MateriTile({this.judul, this.name, this.desc});
 
   @override
   Widget build(BuildContext context) {
@@ -11,31 +16,49 @@ class MateriTile extends StatelessWidget {
         Navigator.pushNamed(context, '/detail-materi');
       },
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-        margin: EdgeInsets.only(
-          top: 24,
-        ),
+        // color: Colors.red,
         width: double.infinity,
-        height: 100,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(
-            color: Colors.blue[100],
-          ),
-          color: Colors.blue[100],
-        ),
-        child: Expanded(
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(
-              "Present Tenses",
-              style: titleTextStyle.copyWith(fontSize: 18),
-              overflow: TextOverflow.ellipsis,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+                width: 100,
+                // color: Colors.red,
+                child: Text(name,
+                    overflow: TextOverflow.ellipsis, style: textStyle1)),
+            Column(
+              children: [
+                Image.asset('assets/circle.png', height: 22),
+                Image.asset(
+                  'assets/line.png',
+                  height: 50,
+                ),
+              ],
             ),
-            Text("Present Tenses",
-                style: subTitleTextStyle.copyWith(fontSize: 12),
-                overflow: TextOverflow.ellipsis),
-          ]),
+            SizedBox(
+              width: 12,
+            ),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    judul,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  SizedBox(
+                    height: 3,
+                  ),
+                  Text(
+                    desc,
+                    overflow: TextOverflow.ellipsis,
+                    style: textStyle1,
+                  )
+                ],
+              ),
+            )
+          ],
         ),
       ),
     );

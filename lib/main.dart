@@ -6,6 +6,7 @@ import 'package:irle_ref2/pages/sign_in_page.dart';
 import 'package:irle_ref2/pages/sign_up_page.dart';
 import 'package:irle_ref2/pages/splash_page.dart';
 import 'package:irle_ref2/providers/auth_provider.dart';
+import 'package:irle_ref2/providers/materi_provider.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -17,7 +18,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (context) => AuthProvider())],
+      providers: [
+        ChangeNotifierProvider(create: (context) => AuthProvider()),
+        ChangeNotifierProvider(create: (context) => MateriProvider()),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         // NOTE : ROUTE

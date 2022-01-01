@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:irle_ref2/models/user_model.dart';
 import 'package:irle_ref2/pages/home/main_page.dart';
+import 'package:irle_ref2/providers/auth_provider.dart';
 // import 'package:irle_ref2/services/auth_service.dart';
 import 'package:irle_ref2/theme.dart';
+import 'package:provider/provider.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/tap_bounce_container.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
@@ -14,7 +16,7 @@ class SignInPage extends StatefulWidget {
   _SignInPageState createState() => _SignInPageState();
 }
 
-TextEditingController usernameController = TextEditingController();
+TextEditingController emailController = TextEditingController();
 TextEditingController passwordController = TextEditingController();
 
 var userUsername;
@@ -25,6 +27,23 @@ var _user = UserModel();
 class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+
+    handleSignIn() async {
+      if (await authProvider.login(
+          email: emailController.text, password: passwordController.text)) {
+        Navigator.pushNamedAndRemoveUntil(
+            context, '/main-page', (route) => false);
+      } else {
+        showTopSnackBar(
+          context,
+          CustomSnackBar.error(
+            message: "Login Gagal",
+          ),
+        );
+      }
+    }
+
     Widget header() {
       return Container(
         // decoration: BoxDecoration(
@@ -56,7 +75,7 @@ class _SignInPageState extends State<SignInPage> {
         children: [
           Container(
               padding: EdgeInsets.symmetric(horizontal: 3),
-              child: Text("Username",
+              child: Text("Email",
                   style: subTitleTextStyle.copyWith(color: darkGrey))),
           SizedBox(
             height: 8,
@@ -69,9 +88,9 @@ class _SignInPageState extends State<SignInPage> {
                 borderRadius: BorderRadius.circular(24)),
             child: Center(
               child: TextField(
-                controller: usernameController,
+                controller: emailController,
                 decoration: InputDecoration.collapsed(
-                  hintText: "username",
+                  hintText: "Email",
                   hintStyle: subTitleTextStyle.copyWith(color: darkGrey),
                 ),
               ),
@@ -126,12 +145,9 @@ class _SignInPageState extends State<SignInPage> {
                 backgroundColor: blueColor,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(24))),
-            onPressed: () {
-              Navigator.pushNamedAndRemoveUntil(
-                  context, '/main-page', (route) => false);
-            },
+            onPressed: handleSignIn,
             child: Text(
-              "next",
+              "Sign In",
               style:
                   subTitleTextStyle.copyWith(color: whiteColor, fontSize: 16),
             )),

@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:irle_ref2/providers/materi_provider.dart';
 import 'package:irle_ref2/theme.dart';
+import 'package:provider/provider.dart';
 
 class SplashPage extends StatefulWidget {
   // const SplashPage({ Key? key }) : super(key: key);
@@ -14,17 +16,15 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     // TODO: implement initState
-    super.initState();
+
     openSplashScreen();
+    super.initState();
   }
 
   openSplashScreen() async {
     //bisa diganti beberapa detik sesuai keinginan
-    var durasiSplash = const Duration(seconds: 3);
-    return Timer(durasiSplash, () {
-      //pindah ke halaman home
-      Navigator.pushReplacementNamed(context, '/onboarding');
-    });
+    await Provider.of<MateriProvider>(context, listen: false).getMateries();
+    Navigator.pushReplacementNamed(context, '/onboarding');
   }
 
   Widget build(BuildContext context) {
