@@ -6,6 +6,7 @@ import 'package:irle_ref2/pages/sign_in_page.dart';
 import 'package:irle_ref2/pages/sign_up_page.dart';
 import 'package:irle_ref2/pages/splash_page.dart';
 import 'package:irle_ref2/providers/auth_provider.dart';
+import 'package:irle_ref2/providers/kuis_provider.dart';
 import 'package:irle_ref2/providers/materi_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => AuthProvider()),
         ChangeNotifierProvider(create: (context) => MateriProvider()),
+        ChangeNotifierProvider(create: (context) => KuisProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -31,7 +33,7 @@ class MyApp extends StatelessWidget {
           '/sign-in': (context) => SignInPage(),
           '/sign-up': (context) => SignUpPage(),
           '/main-page': (context) => MainPage(),
-          '/detail-materi': (context) => DetailMateriPage(),
+          // '/detail-materi': (context) => DetailMateriPage(),
         },
       ),
     );

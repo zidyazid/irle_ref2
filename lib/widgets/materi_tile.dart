@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:irle_ref2/pages/detail_materi_page.dart';
 import 'package:irle_ref2/theme.dart';
 
 class MateriTile extends StatelessWidget {
@@ -6,14 +7,43 @@ class MateriTile extends StatelessWidget {
   final String judul;
   final String name;
   final String desc;
+  final String strukturPositif;
+  final String strukturNegatif;
+  final String strukturPertanyaan;
+  final String contohPositif;
+  final String contohNegatif;
+  final String contohPertanyaan;
+  final int id;
 
-  MateriTile({this.judul, this.name, this.desc});
+  MateriTile(
+      {this.judul,
+      this.name,
+      this.desc,
+      this.strukturPositif,
+      this.strukturNegatif,
+      this.strukturPertanyaan,
+      this.contohPositif,
+      this.contohNegatif,
+      this.contohPertanyaan,
+      this.id});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, '/detail-materi');
+        Navigator.push(
+            (context),
+            MaterialPageRoute(
+                builder: (context) => DetailMateriPage(
+                    judul: judul,
+                    penjelasan: desc,
+                    strukturPositif: strukturPositif,
+                    strukturNegatif: strukturNegatif,
+                    strukturPertanyaan: strukturPertanyaan,
+                    contohPositif: contohPositif,
+                    contohNegatif: contohNegatif,
+                    contohPertanyaan: contohPertanyaan,
+                    id: id)));
       },
       child: Container(
         // color: Colors.red,

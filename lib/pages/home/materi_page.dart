@@ -39,7 +39,14 @@ class MateriPage extends StatelessWidget {
                         (materi) => MateriTile(
                             judul: materi.judul,
                             name: materi.name,
-                            desc: materi.penjelasan),
+                            desc: materi.penjelasan,
+                            strukturPositif: materi.strukturPos,
+                            strukturNegatif: materi.strukturNegatif,
+                            strukturPertanyaan: materi.strukturPertanyaan,
+                            contohPositif: materi.contohPos,
+                            contohNegatif: materi.contohNegatif,
+                            contohPertanyaan: materi.contohPertanyaan,
+                            id: materi.id),
                       )
                       .toList(),
                   // children: [
