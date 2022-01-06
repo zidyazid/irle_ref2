@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 // NOTE : LIBRARY COLOR
 Color blueColor = Color(0xFF628EFF);
 Color primaryColor = Color(0xFF1AAEB7);
-Color sekunderColor = Color(0xFF1AAEB7);
+Color sekunderColor = Color(0xFF2AADA2);
 Color subtleBlue = Color(0xFFCCDAFC);
 Color lightRed = Color(0xFFFF6A88);
 Color primaryTextColor = Color(0xFF404040);

@@ -6,7 +6,8 @@ class KuisService {
   String baseUrl = "http://192.168.43.18:8000/api";
 
   Future<List<KuisModel>> getKuises(id) async {
-    var url = "$baseUrl/quiz?id=1";
+    // SELANJUTNYA COBA LAKUKAN [ERUBAHAN PADA PARAMETER DARI id MENJADI materi_id
+    var url = "$baseUrl/quiz?id=$id";
 
     var headers = {'Content-Type': 'application/json'};
     var response = await http.get(url, headers: headers);

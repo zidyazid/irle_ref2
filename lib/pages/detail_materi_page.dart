@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:irle_ref2/models/kuis_model.dart';
+import 'package:irle_ref2/pages/kuis_page.dart';
 import 'package:irle_ref2/providers/kuis_provider.dart';
 import 'package:irle_ref2/theme.dart';
 import 'package:provider/provider.dart';
@@ -105,8 +106,15 @@ class DetailMateriPage extends StatelessWidget {
                       style: TextButton.styleFrom(
                           backgroundColor: blueColor, elevation: 1.0),
                       onPressed: () {
-                        var kuis = kuisProvider.getKuises(id.toString());
-                        print(kuis);
+                        // var kuis = kuisProvider.getKuises(id.toString());
+                        // print(kuis);
+
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => KuisPage(
+                                      id: id,
+                                    )));
                       },
                       child: Text(
                         "Kuis",
