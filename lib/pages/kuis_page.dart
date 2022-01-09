@@ -1,22 +1,26 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:irle_ref2/pages/score_kuis.dart';
+// import 'package:irle_ref2/pages/home/main_page.dart';
 import 'package:irle_ref2/providers/kuis_provider.dart';
 import 'package:irle_ref2/widgets/pertanyaan_kuis.dart';
 // import 'package:irle_ref2/widgets/pertanyaan_kuis.dart';
 import 'package:provider/provider.dart';
-
 import '../theme.dart';
 
 class KuisPage extends StatefulWidget {
   // const KuisPage({ Key? key }) : super(key: key);
   final int id;
+  final int jumlahPertanyaan;
 
-  KuisPage({this.id});
+  KuisPage({this.id, this.jumlahPertanyaan});
   @override
   _KuisPageState createState() => _KuisPageState();
 }
 
 class _KuisPageState extends State<KuisPage> {
-  @override
+  // @override
+  // KuisProvider kuisProvider = Provider.of<KuisProvider>(context, listen: false);
   TextEditingController jawabanController = TextEditingController();
   // NOTE INDEX ARRAY KUIS
   int index = 0;
@@ -36,16 +40,65 @@ class _KuisPageState extends State<KuisPage> {
     // print(data);
   }
 
+  handleAlert() {
+    return Timer(Duration(seconds: 3), () {
+      Navigator.pop(context);
+    });
+  }
+
   Widget build(BuildContext context) {
     KuisProvider kuisProvider = Provider.of<KuisProvider>(context);
     Widget appBar() {
       return AppBar(
-        backgroundColor: primaryColor,
+        automaticallyImplyLeading: false,
+        elevation: 0.0,
+        backgroundColor:
+            (widget.jumlahPertanyaan > index) ? primaryColor : blueColor,
         title: Text(
-          "Quiz",
+          (widget.jumlahPertanyaan > index) ? "Quiz" : "",
           style: titleTextStyle.copyWith(fontSize: 18),
         ),
         centerTitle: true,
+      );
+    }
+
+    Widget hasilKuis(int score) {
+      return Container(
+        width: double.infinity,
+        height: MediaQuery.of(context).size.height,
+        color: blueColor,
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            // crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Image.asset(
+                (score < 50)
+                    ? 'assets/kuis_failed.png'
+                    : 'assets/kuis_success.png',
+                width: 200.0,
+              ),
+              SizedBox(height: 12),
+              Text((score < 50) ? 'Oopss !!' : 'Yeaah',
+                  style: titleTextStyle.copyWith(fontSize: 32)),
+              SizedBox(height: 12),
+              Text('Total Score Anda : ' + score.toString(),
+                  style: titleTextStyle),
+              SizedBox(height: 12),
+              Container(
+                width: 270,
+                height: 50,
+                child: TextButton(
+                    style: TextButton.styleFrom(backgroundColor: whiteColor),
+                    onPressed: () {
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, '/main-page', (route) => false);
+                    },
+                    child: Text("Lanjut Belajar")),
+              )
+            ],
+          ),
+        ),
       );
     }
 
@@ -121,14 +174,87 @@ class _KuisPageState extends State<KuisPage> {
                             if (jawabanUser ==
                                 kuisProvider.kuises[index].jawaban) {
                               setState(() {
-                                index++;
-                                pertanyaanKe++;
-                                score = score + 10;
+                                if (index < kuisProvider.kuises.length) {
+                                  score = score + 10;
+                                  AlertDialog alertTrue = AlertDialog(
+                                    content: Container(
+                                      width: double.infinity,
+                                      height: 400,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Image.asset("assets/true.png"),
+                                          Text("Skor : " + score.toString()),
+                                          Text(
+                                            "Yeay!",
+                                            style: titleTextStyle.copyWith(
+                                                color: primaryColor),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return alertTrue;
+                                      });
+
+                                  pertanyaanKe++;
+                                  index++;
+
+                                  jawabanController.text = "";
+                                } else {
+                                  if (score > 50) {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => ScoreKuis(
+                                                  imgUrl: 'kuis_success.png',
+                                                )));
+                                  } else {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => ScoreKuis(
+                                                  imgUrl: 'kuis_failed.png',
+                                                )));
+                                  }
+                                }
                               });
-                              print("benar");
-                              print("$score");
+
+                              return;
                             } else {
+                              score = score + 0;
+                              AlertDialog alertFalse = AlertDialog(
+                                content: Container(
+                                  width: double.infinity,
+                                  height: 400,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Image.asset("assets/false.png"),
+                                      Text("Skor : " + score.toString()),
+                                      Text(
+                                        "Ooopss!",
+                                        style: titleTextStyle.copyWith(
+                                            color: primaryColor),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                              showDialog(
+                                  context: context,
+                                  builder: (context) => alertFalse);
+
+                              pertanyaanKe++;
+                              index++;
+                              jawabanController.text = "";
+
                               print("salah");
+                              return;
                             }
                           },
                           child: Text("Kirim")),
@@ -140,10 +266,12 @@ class _KuisPageState extends State<KuisPage> {
       );
     }
 
+    print('nilai index : $index');
+    print('nilai index : ' + kuisProvider.kuises.length.toString());
     return Scaffold(
       appBar: appBar(),
       body: ListView(children: [
-        index < kuisProvider.kuises.length ? content() : Text("Finish")
+        (widget.jumlahPertanyaan > index) ? content() : hasilKuis(score)
       ]),
     );
   }

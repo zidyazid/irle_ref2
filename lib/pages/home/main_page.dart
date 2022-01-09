@@ -25,7 +25,9 @@ class _MainPageState extends State<MainPage> {
         // color: Colors.red,
         child: FloatingActionButton(
           backgroundColor: primaryColor,
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, '/chatbot-page');
+          },
           child: Image.asset(
             "assets/logo_chatbot.png",
             width: 25,

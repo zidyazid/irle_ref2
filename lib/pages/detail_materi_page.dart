@@ -5,7 +5,7 @@ import 'package:irle_ref2/providers/kuis_provider.dart';
 import 'package:irle_ref2/theme.dart';
 import 'package:provider/provider.dart';
 
-class DetailMateriPage extends StatelessWidget {
+class DetailMateriPage extends StatefulWidget {
   // const DetailMateriPage({ Key? key }) : super(key: key);
 
   final String penjelasan;
@@ -30,6 +30,24 @@ class DetailMateriPage extends StatelessWidget {
       this.id});
 
   @override
+  _DetailMateriPageState createState() => _DetailMateriPageState();
+}
+
+class _DetailMateriPageState extends State<DetailMateriPage> {
+  getKuisData() async {
+    await Provider.of<KuisProvider>(context, listen: false)
+        .getKuises(widget.id.toString());
+
+    // print(data);
+  }
+
+  void initState() {
+    getKuisData();
+    print(getKuisData());
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     KuisProvider kuisProvider = Provider.of<KuisProvider>(context);
 
@@ -52,13 +70,13 @@ class DetailMateriPage extends StatelessWidget {
             children: [
               // NOTE: TITLE
               Text(
-                judul,
+                widget.judul,
                 style: titleTextStyle.copyWith(color: primaryColor),
               ),
               SizedBox(height: 24),
               // NOTE: ISI
               Text(
-                penjelasan,
+                widget.penjelasan,
                 style: textStyle1.copyWith(color: Colors.black),
                 textAlign: TextAlign.justify,
               ),
@@ -70,7 +88,7 @@ class DetailMateriPage extends StatelessWidget {
                 textAlign: TextAlign.justify,
               ),
               Text(
-                strukturPositif,
+                widget.strukturPositif,
                 style: textStyle1.copyWith(color: Colors.black),
                 textAlign: TextAlign.justify,
               ),
@@ -82,7 +100,7 @@ class DetailMateriPage extends StatelessWidget {
                 textAlign: TextAlign.justify,
               ),
               Text(
-                strukturNegatif,
+                widget.strukturNegatif,
                 style: textStyle1.copyWith(color: Colors.black),
                 textAlign: TextAlign.justify,
               ),
@@ -94,7 +112,7 @@ class DetailMateriPage extends StatelessWidget {
                 textAlign: TextAlign.justify,
               ),
               Text(
-                strukturPertanyaan,
+                widget.strukturPertanyaan,
                 style: textStyle1.copyWith(color: Colors.black),
                 textAlign: TextAlign.justify,
               ),
@@ -108,13 +126,17 @@ class DetailMateriPage extends StatelessWidget {
                       onPressed: () {
                         // var kuis = kuisProvider.getKuises(id.toString());
                         // print(kuis);
-
+                        print(widget.id);
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => KuisPage(
-                                      id: id,
+                                      id: widget.id,
+                                      jumlahPertanyaan:
+                                          kuisProvider.kuises.length,
                                     )));
+                        // print('jumlah kuis = ' +
+                        //     kuisProvider.kuises.length.toString());
                       },
                       child: Text(
                         "Kuis",

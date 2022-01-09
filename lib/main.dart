@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:irle_ref2/pages/chabot_page.dart';
 import 'package:irle_ref2/pages/detail_materi_page.dart';
 import 'package:irle_ref2/pages/home/main_page.dart';
 import 'package:irle_ref2/pages/onboarding_page.dart';
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
           '/sign-in': (context) => SignInPage(),
           '/sign-up': (context) => SignUpPage(),
           '/main-page': (context) => MainPage(),
+          '/chatbot-page': (context) => ChabotPage(title: "Chatbot"),
           // '/detail-materi': (context) => DetailMateriPage(),
         },
       ),
