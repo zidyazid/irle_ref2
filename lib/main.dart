@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:irle_ref2/pages/chabot_page.dart';
-import 'package:irle_ref2/pages/detail_materi_page.dart';
+// import 'package:irle_ref2/pages/detail_materi_page.dart';
 import 'package:irle_ref2/pages/home/main_page.dart';
 import 'package:irle_ref2/pages/onboarding_page.dart';
 import 'package:irle_ref2/pages/sign_in_page.dart';
 import 'package:irle_ref2/pages/sign_up_page.dart';
 import 'package:irle_ref2/pages/splash_page.dart';
 import 'package:irle_ref2/providers/auth_provider.dart';
+import 'package:irle_ref2/providers/kosa_kata_provider.dart';
 import 'package:irle_ref2/providers/kuis_provider.dart';
 import 'package:irle_ref2/providers/materi_provider.dart';
 import 'package:provider/provider.dart';
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => AuthProvider()),
         ChangeNotifierProvider(create: (context) => MateriProvider()),
         ChangeNotifierProvider(create: (context) => KuisProvider()),
+        ChangeNotifierProvider(create: (context) => KosaKataProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

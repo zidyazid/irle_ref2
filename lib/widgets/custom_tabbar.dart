@@ -14,15 +14,12 @@ class CustomTabBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.all(24),
+      decoration: BoxDecoration(
+          color: darkGrey, borderRadius: BorderRadius.circular(4)),
       height: 50,
       child: Stack(
         children: [
-          Container(
-            margin: EdgeInsets.only(top: 48),
-            height: 1,
-            width: double.infinity,
-            color: whiteColor,
-          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: titles
@@ -44,7 +41,7 @@ class CustomTabBar extends StatelessWidget {
                                   backgroundColor:
                                       (titles.indexOf(e) == selectedIndex)
                                           ? whiteColor
-                                          : Colors.black12),
+                                          : darkGrey),
                               onPressed: () {
                                 if (onTap != null) {
                                   // cek titles

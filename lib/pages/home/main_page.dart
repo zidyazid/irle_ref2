@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:irle_ref2/models/user_model.dart';
 import 'package:irle_ref2/pages/home/kosa_kata_page.dart';
 import 'package:irle_ref2/pages/home/materi_page.dart';
+import 'package:irle_ref2/pages/home/status_page.dart';
 import 'package:irle_ref2/providers/auth_provider.dart';
+import 'package:irle_ref2/providers/kosa_kata_provider.dart';
 import 'package:irle_ref2/theme.dart';
 import 'package:provider/provider.dart';
 
@@ -107,7 +109,7 @@ class _MainPageState extends State<MainPage> {
           return KosaKataPage();
           break;
         case 2:
-          return Center(child: Text("halaman status", style: textStyle1));
+          return StatusPage();
           break;
         default:
       }
