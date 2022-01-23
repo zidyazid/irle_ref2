@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:irle_ref2/models/kosa_kata_model.dart';
-import 'package:irle_ref2/models/kuis_model.dart';
+// import 'package:irle_ref2/models/kuis_model.dart';
 
 class KosaKataServices {
   String baseUrl = "http://192.168.43.18:8000/api";

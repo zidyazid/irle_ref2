@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:irle_ref2/models/user_model.dart';
+import 'package:irle_ref2/providers/auth_provider.dart';
 import 'package:irle_ref2/providers/kosa_kata_provider.dart';
+import 'package:irle_ref2/providers/memorizing_detail_provider.dart';
 import 'package:irle_ref2/theme.dart';
 import 'package:irle_ref2/widgets/custom_tabbar.dart';
 import 'package:provider/provider.dart';
@@ -16,36 +19,56 @@ class _KosaKataPageState extends State<KosaKataPage> {
     // TODO: implement initState
     getDataKosaKata();
     super.initState();
+    // getDataMemorizingDetail();
+  }
+
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    this.getDataMemorizingDetail();
   }
 
   getDataKosaKata() async {
     await Provider.of<KosaKataProvider>(context, listen: false).getKosaKata();
   }
 
+  getDataMemorizingDetail() async {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    UserModel user = authProvider.user;
+    print("id dari user yang sedang login adalah : " + user.id.toString());
+    await Provider.of<MemorizingDetailProvider>(context, listen: false)
+        .getMemorizingDetail(user.id);
+  }
+
+  int selectedIndex = 0;
+  // @override
+
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    UserModel user = authProvider.user;
     KosaKataProvider _kosaKataProvider = Provider.of<KosaKataProvider>(context);
-    int selectedIndex = 0;
-    // @override
-    Widget memorizedCard() {
+    MemorizingDetailProvider _memorizingDetail =
+        Provider.of<MemorizingDetailProvider>(context);
+
+    Widget memorizedCard(
+      String verb1,
+      String verb2,
+      String verb3,
+      String translate,
+      String verbing,
+    ) {
       return Container(
           margin: EdgeInsets.fromLTRB(30, 0, 30, 12),
           padding: EdgeInsets.fromLTRB(30, 12, 30, 12),
           width: double.infinity,
           decoration: BoxDecoration(
-              color: whiteColor,
-              borderRadius: BorderRadius.circular(12),
-              boxShadow: [
-                BoxShadow(
-                    color: darkGrey,
-                    offset: Offset.zero,
-                    blurRadius: 15.0,
-                    spreadRadius: 1.0),
-              ]),
+            color: whiteColor,
+            borderRadius: BorderRadius.circular(12),
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Sing",
+                verb1,
                 style: titleTextStyle.copyWith(color: primaryColor),
               ),
               SizedBox(height: 18),
@@ -53,13 +76,13 @@ class _KosaKataPageState extends State<KosaKataPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(child: Text("Sang")),
+                  Expanded(child: Text(verb2)),
                   // SizedBox(width: 18),
-                  Expanded(child: Text("Sung")),
+                  Expanded(child: Text(verb3)),
                   // SizedBox(width: 18),
-                  Expanded(child: Text("Singing")),
+                  Expanded(child: Text(verbing)),
                   // SizedBox(width: 18),
-                  Expanded(child: Text("bernyanyi")),
+                  Expanded(child: Text(translate)),
                 ],
               ),
             ],
@@ -117,12 +140,15 @@ class _KosaKataPageState extends State<KosaKataPage> {
     Widget content() {
       return Column(
         children: [
+          // Text(_memorizingDeta),
           CustomTabBar(
             titles: ['Words', 'My Words'],
             selectedIndex: selectedIndex,
             onTap: (index) {
               setState(() {
                 selectedIndex = index;
+                print(user.id.toString());
+                print(_memorizingDetail);
               });
             },
           ),
@@ -141,7 +167,16 @@ class _KosaKataPageState extends State<KosaKataPage> {
                         .toList(),
                   )
                 : Column(
-                    children: [memorizedCard()],
+                    children: _memorizingDetail.memorizingDetails
+                        .map((memorizingDetail) => memorizedCard(
+                              // memorizingDetail.verb1,
+                              memorizingDetail.verb1,
+                              memorizingDetail.verb2,
+                              memorizingDetail.verb3,
+                              memorizingDetail.translate,
+                              memorizingDetail.verbing,
+                            ))
+                        .toList(),
                   );
 
             return Center(

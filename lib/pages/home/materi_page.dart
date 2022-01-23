@@ -17,10 +17,11 @@ class MateriPage extends StatelessWidget {
         width: double.infinity,
         color: whiteColor,
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          SizedBox(height: 30),
           Stack(children: [
-            Image.asset(
-              "assets/materi_img.png",
-            ),
+            SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Image.asset("assets/tenses_timeline.png", height: 200)),
             Container(
                 width: double.infinity,
                 padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
