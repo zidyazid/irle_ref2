@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:irle_ref2/providers/kosa_kata_provider.dart';
 import 'package:irle_ref2/providers/materi_provider.dart';
 import 'package:irle_ref2/theme.dart';
 import 'package:provider/provider.dart';
@@ -13,12 +14,21 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-  @override
+  // @override
   void initState() {
     // TODO: implement initState
 
     openSplashScreen();
     super.initState();
+  }
+
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    this.getDataKosaKata();
+  }
+
+  getDataKosaKata() async {
+    await Provider.of<KosaKataProvider>(context, listen: false).getKosaKata();
   }
 
   openSplashScreen() async {

@@ -22,4 +22,17 @@ class MemorizingDetailProvider with ChangeNotifier {
       print(e);
     }
   }
+
+  Future<bool> add(String token, int userId, int kosakataId) async {
+    try {
+      if (await MemorizingDetailService().add(token, userId, kosakataId)) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      print(e);
+      return false;
+    }
+  }
 }

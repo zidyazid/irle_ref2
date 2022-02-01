@@ -1,8 +1,11 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:irle_ref2/models/user_model.dart';
 import 'package:irle_ref2/pages/score_kuis.dart';
+import 'package:irle_ref2/providers/auth_provider.dart';
 // import 'package:irle_ref2/pages/home/main_page.dart';
 import 'package:irle_ref2/providers/kuis_provider.dart';
+import 'package:irle_ref2/providers/status_provider.dart';
 import 'package:irle_ref2/widgets/pertanyaan_kuis.dart';
 // import 'package:irle_ref2/widgets/pertanyaan_kuis.dart';
 import 'package:provider/provider.dart';
@@ -20,6 +23,7 @@ class KuisPage extends StatefulWidget {
 
 class _KuisPageState extends State<KuisPage> {
   // @override
+
   // KuisProvider kuisProvider = Provider.of<KuisProvider>(context, listen: false);
   TextEditingController jawabanController = TextEditingController();
   // NOTE INDEX ARRAY KUIS
@@ -47,6 +51,8 @@ class _KuisPageState extends State<KuisPage> {
   }
 
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    UserModel user = authProvider.user;
     KuisProvider kuisProvider = Provider.of<KuisProvider>(context);
     Widget appBar() {
       return AppBar(
@@ -90,7 +96,9 @@ class _KuisPageState extends State<KuisPage> {
                 height: 50,
                 child: TextButton(
                     style: TextButton.styleFrom(backgroundColor: whiteColor),
-                    onPressed: () {
+                    onPressed: () async {
+                      await StatusProvider()
+                          .add(user.token, widget.id, score, user.id);
                       Navigator.pushNamedAndRemoveUntil(
                           context, '/main-page', (route) => false);
                     },
@@ -212,6 +220,7 @@ class _KuisPageState extends State<KuisPage> {
                                         MaterialPageRoute(
                                             builder: (context) => ScoreKuis(
                                                   imgUrl: 'kuis_success.png',
+                                                  id: widget.id,
                                                 )));
                                   } else {
                                     Navigator.push(
@@ -219,6 +228,7 @@ class _KuisPageState extends State<KuisPage> {
                                         MaterialPageRoute(
                                             builder: (context) => ScoreKuis(
                                                   imgUrl: 'kuis_failed.png',
+                                                  id: widget.id,
                                                 )));
                                   }
                                 }

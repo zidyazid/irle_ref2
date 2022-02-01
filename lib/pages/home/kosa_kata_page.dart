@@ -15,20 +15,9 @@ class KosaKataPage extends StatefulWidget {
 }
 
 class _KosaKataPageState extends State<KosaKataPage> {
-  void initState() {
-    // TODO: implement initState
-    getDataKosaKata();
-    super.initState();
-    // getDataMemorizingDetail();
-  }
-
   void didChangeDependencies() {
     super.didChangeDependencies();
     this.getDataMemorizingDetail();
-  }
-
-  getDataKosaKata() async {
-    await Provider.of<KosaKataProvider>(context, listen: false).getKosaKata();
   }
 
   getDataMemorizingDetail() async {
@@ -89,8 +78,8 @@ class _KosaKataPageState extends State<KosaKataPage> {
           ));
     }
 
-    Widget cardWords(String verb1, String verb2, String verb3, String translate,
-        String verbing, int id) {
+    Widget cardWords(String token, int userId, int kosakataId, String verb1,
+        String verb2, String verb3, String translate, String verbing, int id) {
       return Container(
           margin: EdgeInsets.fromLTRB(30, 0, 30, 12),
           padding: EdgeInsets.fromLTRB(30, 12, 30, 12),
@@ -116,6 +105,12 @@ class _KosaKataPageState extends State<KosaKataPage> {
                           backgroundColor: whiteColor, elevation: 8.0),
                       onPressed: () {
                         print(id.toString());
+                        setState(() {
+                          // _memorizingDetail.add(token, userId, kosakataId);
+                          MemorizingDetailProvider()
+                              .add(token, userId, kosakataId);
+                          // print(kosakataId);
+                        });
                       },
                       child: Text("Telah Dihapal"))
                 ],
@@ -158,6 +153,9 @@ class _KosaKataPageState extends State<KosaKataPage> {
                 ? Column(
                     children: _kosaKataProvider.vocabullaries
                         .map((vocabullary) => cardWords(
+                            user.token,
+                            user.id,
+                            vocabullary.id,
                             vocabullary.verb1,
                             vocabullary.verb2,
                             vocabullary.verb3,

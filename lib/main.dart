@@ -11,6 +11,7 @@ import 'package:irle_ref2/providers/kosa_kata_provider.dart';
 import 'package:irle_ref2/providers/kuis_provider.dart';
 import 'package:irle_ref2/providers/materi_provider.dart';
 import 'package:irle_ref2/providers/memorizing_detail_provider.dart';
+import 'package:irle_ref2/providers/status_provider.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => KuisProvider()),
         ChangeNotifierProvider(create: (context) => KosaKataProvider()),
         ChangeNotifierProvider(create: (context) => MemorizingDetailProvider()),
+        ChangeNotifierProvider(create: (context) => StatusProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

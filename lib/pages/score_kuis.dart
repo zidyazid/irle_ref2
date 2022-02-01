@@ -5,7 +5,8 @@ class ScoreKuis extends StatelessWidget {
 
   final String imgUrl;
   final int score;
-  ScoreKuis({this.imgUrl, this.score});
+  final int id;
+  ScoreKuis({this.imgUrl, this.score, this.id});
 
   @override
   Widget build(BuildContext context) {

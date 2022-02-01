@@ -11,6 +11,7 @@ class MateriPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MateriProvider materiProvider = Provider.of<MateriProvider>(context);
+    print(materiProvider);
 
     Widget content() {
       return Container(

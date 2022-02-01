@@ -5,6 +5,7 @@ import 'package:irle_ref2/pages/home/materi_page.dart';
 import 'package:irle_ref2/pages/home/status_page.dart';
 import 'package:irle_ref2/providers/auth_provider.dart';
 import 'package:irle_ref2/providers/kosa_kata_provider.dart';
+import 'package:irle_ref2/providers/status_provider.dart';
 import 'package:irle_ref2/theme.dart';
 import 'package:provider/provider.dart';
 
@@ -15,6 +16,20 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    this.getDataStatus();
+  }
+
+  getDataStatus() async {
+    //bisa diganti beberapa detik sesuai keinginan
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    UserModel user = authProvider.user;
+    // print(user.id);
+    await Provider.of<StatusProvider>(context, listen: false)
+        .getStatuses(user.id);
+  }
+
   int indexPage = 0;
 
   @override

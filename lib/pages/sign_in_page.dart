@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:irle_ref2/models/user_model.dart';
 import 'package:irle_ref2/pages/home/main_page.dart';
 import 'package:irle_ref2/providers/auth_provider.dart';
+import 'package:irle_ref2/providers/status_provider.dart';
 // import 'package:irle_ref2/services/auth_service.dart';
 import 'package:irle_ref2/theme.dart';
 import 'package:provider/provider.dart';
@@ -28,10 +29,12 @@ class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    // StatusProvider statusProvider = Provider.of<StatusProvider>(context);
 
     handleSignIn() async {
       if (await authProvider.login(
           email: emailController.text, password: passwordController.text)) {
+        // statusProvider.getStatuses();
         Navigator.pushNamedAndRemoveUntil(
             context, '/main-page', (route) => false);
       } else {
@@ -69,7 +72,7 @@ class _SignInPageState extends State<SignInPage> {
       );
     }
 
-    Widget inputUsername() {
+    Widget inputEmail() {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -166,7 +169,7 @@ class _SignInPageState extends State<SignInPage> {
           ),
           Column(
             children: [
-              inputUsername(),
+              inputEmail(),
               SizedBox(
                 height: 12,
               ),
