@@ -22,9 +22,11 @@ class StatusProvider with ChangeNotifier {
     }
   }
 
-  Future<bool> add(String token, int idMateri, int score, int userId) async {
+  Future<bool> add(
+      String token, int idMateri, int score, int userId, int idSubmenu) async {
     try {
-      if (await StatusService().add(token, idMateri, score, userId)) {
+      if (await StatusService()
+          .add(token, idMateri, score, userId, idSubmenu)) {
         return true;
       } else {
         return false;

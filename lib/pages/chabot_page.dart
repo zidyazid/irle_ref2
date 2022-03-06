@@ -88,30 +88,40 @@ class _ChabotPage extends State<ChabotPage> {
         backgroundColor: primaryColor,
       ),
       body: Container(
+        padding: EdgeInsets.symmetric(horizontal: 20),
         color: Colors.white60,
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               // NOTE : PENGENALAN CHATBOT
-              Container(
-                  margin: EdgeInsets.all(30),
-                  width: double.infinity,
-                  child: Row(
-                    children: [
-                      Image.asset(
-                        'assets/logo_chatbot.png',
-                        width: 100,
+
+              _messages.length == 0
+                  ? Image.asset(
+                      'assets/logo_chatbot.png',
+                      width: 50,
+                    )
+                  : SizedBox(),
+              _messages.length == 0
+                  ? Expanded(
+                      child: Column(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.all(10),
+                            margin: EdgeInsets.only(left: 60),
+                            decoration: BoxDecoration(
+                                color: Colors.grey[300],
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(12),
+                                    bottomRight: Radius.circular(12),
+                                    bottomLeft: Radius.circular(12))),
+                            child: Text(
+                                "hello! My name is irle, i will be your friend to practice your english, i have some interesting topic like : \n 1. food \n 2. hobbies \n 3. daily activity"),
+                          ),
+                        ],
                       ),
-                      Expanded(
-                        child: Column(
-                          children: [
-                            Text(
-                                "hello! My name is irle, i will be your friend to practice your english"),
-                          ],
-                        ),
-                      ),
-                    ],
-                  )),
+                    )
+                  : SizedBox(),
+
               Flexible(
                   child: ListView.builder(
                 padding: EdgeInsets.all(8.0),

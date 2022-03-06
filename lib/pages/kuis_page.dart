@@ -13,10 +13,11 @@ import '../theme.dart';
 
 class KuisPage extends StatefulWidget {
   // const KuisPage({ Key? key }) : super(key: key);
+  final int materiId;
   final int id;
   final int jumlahPertanyaan;
 
-  KuisPage({this.id, this.jumlahPertanyaan});
+  KuisPage({this.materiId, this.id, this.jumlahPertanyaan});
   @override
   _KuisPageState createState() => _KuisPageState();
 }
@@ -29,7 +30,7 @@ class _KuisPageState extends State<KuisPage> {
   // NOTE INDEX ARRAY KUIS
   int index = 0;
   int pertanyaanKe = 1;
-  int score = 0;
+  double score = 0;
 
   void initState() {
     getKuisData();
@@ -68,7 +69,7 @@ class _KuisPageState extends State<KuisPage> {
       );
     }
 
-    Widget hasilKuis(int score) {
+    Widget hasilKuis(double score) {
       return Container(
         width: double.infinity,
         height: MediaQuery.of(context).size.height,
@@ -97,8 +98,9 @@ class _KuisPageState extends State<KuisPage> {
                 child: TextButton(
                     style: TextButton.styleFrom(backgroundColor: whiteColor),
                     onPressed: () async {
-                      await StatusProvider()
-                          .add(user.token, widget.id, score, user.id);
+                      print(widget.id);
+                      await StatusProvider().add(user.token, widget.materiId,
+                          score.toInt(), user.id, widget.id);
                       Navigator.pushNamedAndRemoveUntil(
                           context, '/main-page', (route) => false);
                     },
@@ -183,7 +185,7 @@ class _KuisPageState extends State<KuisPage> {
                                 kuisProvider.kuises[index].jawaban) {
                               setState(() {
                                 if (index < kuisProvider.kuises.length) {
-                                  score = score + 10;
+                                  score = score + 25.0;
                                   AlertDialog alertTrue = AlertDialog(
                                     content: Container(
                                       width: double.infinity,

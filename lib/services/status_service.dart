@@ -26,11 +26,16 @@ class StatusService {
     }
   }
 
-  Future<bool> add(String token, int idMateri, int score, int userId) async {
+  Future<bool> add(
+      String token, int idMateri, int score, int userId, int submenuId) async {
     var url = '$baseUrl/add-status';
     var headers = {'Content-Type': 'application/json', 'Authorization': token};
-    var body =
-        jsonEncode({'id_materi': idMateri, 'score': score, 'user_id': userId});
+    var body = jsonEncode({
+      'id_materi': idMateri,
+      'score': score,
+      'user_id': userId,
+      'submenu_id': submenuId
+    });
 
     var response = await http.post(url, headers: headers, body: body);
     print(response.body);
@@ -40,7 +45,7 @@ class StatusService {
       return true;
     } else {
       print(
-          'token : $token, id materi : $idMateri, score : $score, user id : $userId');
+          'token : $token, id materi : $idMateri, score : $score, user id : $userId, submenu_id : $submenuId');
       print(response.statusCode);
       print(response.reasonPhrase);
       throw Exception('Gagal Menyimpan Data');

@@ -1,42 +1,33 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:irle_ref2/models/user_model.dart';
 import 'package:irle_ref2/providers/auth_provider.dart';
 import 'package:irle_ref2/providers/status_provider.dart';
 import 'package:provider/provider.dart';
 
-import '../../theme.dart';
+import '../theme.dart';
 
-class StatusPage extends StatefulWidget {
-  // const StatusPage({ Key? key }) : super(key: key);
+class StatusPreview extends StatefulWidget {
+  // const StatusPreview({ Key? key }) : super(key: key);
   final double percentage;
-  StatusPage({this.percentage});
+  StatusPreview({this.percentage});
   @override
-  _StatusPageState createState() => _StatusPageState();
+  _StatusPreviewState createState() => _StatusPreviewState();
 }
 
-class _StatusPageState extends State<StatusPage> {
-  final box = GetStorage();
-
+class _StatusPreviewState extends State<StatusPreview> {
   Widget build(BuildContext context) {
-    AuthProvider authProvider = Provider.of<AuthProvider>(context);
-    UserModel user = authProvider.user;
     StatusProvider _statusProvider = Provider.of<StatusProvider>(context);
 
     Widget contentPreview(double percentage) {
       return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        (user == null && box.read('id') == null)
-            ? Text("Nilai Submateri",
-                style: subTitleTextStyle.copyWith(color: Colors.black87))
-            : SizedBox(),
+        Text("Nilai Submateri",
+            style: subTitleTextStyle.copyWith(color: Colors.black87)),
 
         SizedBox(height: 12),
-        (user == null && box.read('id') == null)
-            ? Text("Bentuk Nominal",
-                style: subTitleTextStyle.copyWith(color: Colors.black87))
-            : SizedBox(),
+        Text("Bentuk Nominal",
+            style: subTitleTextStyle.copyWith(color: Colors.black87)),
         SizedBox(height: 12),
         Stack(
           children: [
@@ -131,55 +122,20 @@ class _StatusPageState extends State<StatusPage> {
         // SizedBox(
         //   height: 24,
         // ),
-        (user == null && box.read('id') == null)
-            ? Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                      height: 100,
-                      width: 100,
-                      child: Center(
-                        child: Icon(Icons.people, size: 50.0),
-                      ),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          color: Colors.grey[200])),
-                ],
-              )
-            : Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Column(
-                    children: [
-                      // Container(
-                      //     child: Center(
-                      //       child: ClipRRect(
-                      //         borderRadius: BorderRadius.circular(24),
-                      //         child: Image(
-                      //           image: NetworkImage(user.profilePhotoUrl),
-                      //           fit: BoxFit.fill,
-                      //         ),
-                      //       ),
-                      //     ),
-                      //     decoration: BoxDecoration(
-                      //       borderRadius: BorderRadius.circular(12),
-                      //     )),
-                      SizedBox(
-                        height: 12,
-                      ),
-                      Text(box.read('name'),
-                          style: subTitleTextStyle.copyWith(
-                              color: Colors.black87)),
-                      // SizedBox(
-                      //   height: 3,
-                      // ),
-                      Text(box.read('name'),
-                          style: subTitleTextStyle.copyWith(
-                              color: Colors.black38)),
-                    ],
-                  ),
-                ],
-              ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+                height: 100,
+                width: 100,
+                child: Center(
+                  child: Icon(Icons.people, size: 50.0),
+                ),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    color: Colors.grey[200])),
+          ],
+        ),
         SizedBox(
           height: 24,
         ),
@@ -192,9 +148,7 @@ class _StatusPageState extends State<StatusPage> {
         SizedBox(
           height: 12,
         ),
-        (user == null && box.read('id') == null)
-            ? contentPreview(50)
-            : content()
+        contentPreview(50)
       ]),
     );
   }

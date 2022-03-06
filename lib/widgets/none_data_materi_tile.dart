@@ -7,19 +7,19 @@ import 'package:irle_ref2/providers/submenu_provider.dart';
 import 'package:irle_ref2/theme.dart';
 import 'package:provider/provider.dart';
 
-class MateriTile extends StatefulWidget {
-  // const MateriTile({ Key? key }) : super(key: key);
+class NoneDataMateriTile extends StatefulWidget {
+  // const NoneDataMateriTile({ Key? key }) : super(key: key);
 
   final int id;
   final String judul;
 
-  MateriTile({this.judul, this.id});
+  NoneDataMateriTile({this.judul, this.id});
 
   @override
-  _MateriTileState createState() => _MateriTileState();
+  _NoneDataMateriTileState createState() => _NoneDataMateriTileState();
 }
 
-class _MateriTileState extends State<MateriTile> {
+class _NoneDataMateriTileState extends State<NoneDataMateriTile> {
   @override
   Widget build(BuildContext context) {
     SubmenuProvider _submenuProvider = Provider.of<SubmenuProvider>(context);

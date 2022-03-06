@@ -10,24 +10,10 @@ class DetailMateriPage extends StatefulWidget {
 
   final String penjelasan;
   final String judul;
-  final String strukturPositif;
-  final String strukturNegatif;
-  final String strukturPertanyaan;
-  final String contohPositif;
-  final String contohNegatif;
-  final String contohPertanyaan;
   final int id;
+  final int materiId;
 
-  DetailMateriPage(
-      {this.penjelasan,
-      this.judul,
-      this.strukturPositif,
-      this.strukturNegatif,
-      this.strukturPertanyaan,
-      this.contohPositif,
-      this.contohNegatif,
-      this.contohPertanyaan,
-      this.id});
+  DetailMateriPage({this.penjelasan, this.judul, this.id, this.materiId});
 
   @override
   _DetailMateriPageState createState() => _DetailMateriPageState();
@@ -82,40 +68,7 @@ class _DetailMateriPageState extends State<DetailMateriPage> {
               ),
               SizedBox(height: 16),
               // NOTE: STRUKTUR POSITIF
-              Text(
-                "Struktur Positif",
-                style: subTitleTextStyle.copyWith(color: Colors.black),
-                textAlign: TextAlign.justify,
-              ),
-              Text(
-                widget.strukturPositif,
-                style: textStyle1.copyWith(color: Colors.black),
-                textAlign: TextAlign.justify,
-              ),
-              SizedBox(height: 16),
-              // NOTE: STRUKTUR POSITIF
-              Text(
-                "Struktur Negatif",
-                style: subTitleTextStyle.copyWith(color: Colors.black),
-                textAlign: TextAlign.justify,
-              ),
-              Text(
-                widget.strukturNegatif,
-                style: textStyle1.copyWith(color: Colors.black),
-                textAlign: TextAlign.justify,
-              ),
-              SizedBox(height: 16),
-              // NOTE: STRUKTUR POSITIF
-              Text(
-                "Struktur Kata Tanya",
-                style: subTitleTextStyle.copyWith(color: Colors.black),
-                textAlign: TextAlign.justify,
-              ),
-              Text(
-                widget.strukturPertanyaan,
-                style: textStyle1.copyWith(color: Colors.black),
-                textAlign: TextAlign.justify,
-              ),
+
               SizedBox(height: 24),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -134,9 +87,10 @@ class _DetailMateriPageState extends State<DetailMateriPage> {
                                       id: widget.id,
                                       jumlahPertanyaan:
                                           kuisProvider.kuises.length,
+                                      materiId: widget.materiId,
                                     )));
-                        // print('jumlah kuis = ' +
-                        //     kuisProvider.kuises.length.toString());
+                        print('jumlah kuis = ' +
+                            kuisProvider.kuises.length.toString());
                       },
                       child: Text(
                         "Kuis",

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_session/flutter_session.dart';
+import 'package:irle_ref2/pages/home/main_page.dart';
+import 'package:irle_ref2/preview/main_preview.dart';
 import 'package:irle_ref2/theme.dart';
 
 class OnboardingPage extends StatefulWidget {
@@ -32,17 +35,22 @@ class _OnboardingPageState extends State<OnboardingPage> {
   @override
   Widget build(BuildContext context) {
     Widget header() {
-      return Container(
-        width: double.infinity,
-        color: whiteColor,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Image.asset(
-              "assets/skip_button.png",
-              width: 60,
-            )
-          ],
+      return GestureDetector(
+        onTap: () {
+          Navigator.pushNamed(context, '/sign-in');
+        },
+        child: Container(
+          width: double.infinity,
+          color: whiteColor,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Image.asset(
+                "assets/skip_button.png",
+                width: 60,
+              )
+            ],
+          ),
         ),
       );
     }
@@ -156,8 +164,12 @@ class _OnboardingPageState extends State<OnboardingPage> {
                           if (indexIndicator < 2) {
                             indexIndicator++;
                           } else {
-                            Navigator.pushNamedAndRemoveUntil(
-                                context, '/sign-in', (route) => false);
+                            // Navigator.pushNamedAndRemoveUntil(
+                            //     context, '/sign-in', (route) => false);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => MainPreview()));
                           }
                         });
                       },

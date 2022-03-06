@@ -1,24 +1,24 @@
-class KuisModel {
+class SubmenuModel {
   int id;
-  int submenuId;
-  String pertanyaan;
-  String jawaban;
+  int materiId;
+  String judul;
+  String penjelasan;
   DateTime createdAt;
   DateTime updatedAt;
 
-  KuisModel(
+  SubmenuModel(
       {this.id,
-      this.submenuId,
-      this.pertanyaan,
-      this.jawaban,
+      this.materiId,
+      this.judul,
+      this.penjelasan,
       this.createdAt,
       this.updatedAt});
 
-  KuisModel.fromJson(Map<String, dynamic> json) {
+  SubmenuModel.fromJson(Map<String, dynamic> json) {
     id = json["id"];
-    submenuId = json["submenu_id"];
-    pertanyaan = json["pertanyaan"];
-    jawaban = json["jawaban"];
+    materiId = json["materi_id"];
+    judul = json["judul"];
+    penjelasan = json["penjelasan"];
     createdAt = json['created_at'] == null
         ? null
         : DateTime.parse(json['created_at'] as String);
@@ -28,13 +28,14 @@ class KuisModel {
   }
 
   Map<String, dynamic> toJson() {
+    // NOTE: MENGEMBALIKAN NILAI JSON
     return {
       'id': id,
-      'submenu_id': submenuId.toString(),
-      'pertanyaan': pertanyaan,
-      'jawaban': jawaban,
+      'materi_id': materiId,
+      'judul': judul,
+      'penjelasan': penjelasan,
       'created_at': createdAt.toString(),
-      'updated_at': updatedAt.toString(),
+      'updated_at': updatedAt.toString()
     };
   }
 }

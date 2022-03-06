@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:irle_ref2/models/user_model.dart';
-import 'package:irle_ref2/pages/home/main_page.dart';
+// import 'package:irle_ref2/pages/home/main_page.dart';
 import 'package:irle_ref2/providers/auth_provider.dart';
-import 'package:irle_ref2/providers/status_provider.dart';
+// import 'package:irle_ref2/providers/status_provider.dart';
 // import 'package:irle_ref2/services/auth_service.dart';
 import 'package:irle_ref2/theme.dart';
 import 'package:provider/provider.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
-import 'package:top_snackbar_flutter/tap_bounce_container.dart';
+// import 'package:top_snackbar_flutter/tap_bounce_container.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class SignInPage extends StatefulWidget {
@@ -35,8 +35,7 @@ class _SignInPageState extends State<SignInPage> {
       if (await authProvider.login(
           email: emailController.text, password: passwordController.text)) {
         // statusProvider.getStatuses();
-        Navigator.pushNamedAndRemoveUntil(
-            context, '/main-page', (route) => false);
+        Navigator.pushNamed(context, '/main-page');
       } else {
         showTopSnackBar(
           context,

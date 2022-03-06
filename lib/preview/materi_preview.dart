@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:irle_ref2/providers/materi_provider.dart';
 import 'package:irle_ref2/theme.dart';
 import 'package:irle_ref2/widgets/materi_tile.dart';
+import 'package:irle_ref2/widgets/none_data_materi_tile.dart';
 import 'package:provider/provider.dart';
 
-class MateriPage extends StatelessWidget {
-  // const MateriPage({ Key? key }) : super(key: key);
+class MateriPreview extends StatelessWidget {
+  // const MateriPreview({ Key? key }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     MateriProvider materiProvider = Provider.of<MateriProvider>(context);
@@ -38,7 +39,7 @@ class MateriPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: materiProvider.materies
                       .map(
-                        (materi) => MateriTile(
+                        (materi) => NoneDataMateriTile(
                           id: materi.id,
                           judul: materi.judul,
                         ),

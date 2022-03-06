@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_session/flutter_session.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:irle_ref2/providers/kosa_kata_provider.dart';
 import 'package:irle_ref2/providers/materi_provider.dart';
 import 'package:irle_ref2/theme.dart';
@@ -33,8 +35,17 @@ class _SplashPageState extends State<SplashPage> {
 
   openSplashScreen() async {
     //bisa diganti beberapa detik sesuai keinginan
+    final box = GetStorage();
+    print(box.getValues());
+    int id = box.read('id');
+    print('id user sebelumnya adalah : ' + id.toString());
     await Provider.of<MateriProvider>(context, listen: false).getMateries();
     Navigator.pushReplacementNamed(context, '/onboarding');
+    // WidgetsFlutterBinding.ensureInitialized();
+    // dynamic name = FlutterSession().get('name');
+    id != null
+        ? Navigator.pushReplacementNamed(context, '/main-page')
+        : Navigator.pushReplacementNamed(context, '/onboarding');
   }
 
   Widget build(BuildContext context) {

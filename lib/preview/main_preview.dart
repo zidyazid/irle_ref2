@@ -5,6 +5,9 @@ import 'package:irle_ref2/models/user_model.dart';
 import 'package:irle_ref2/pages/home/kosa_kata_page.dart';
 import 'package:irle_ref2/pages/home/materi_page.dart';
 import 'package:irle_ref2/pages/home/status_page.dart';
+import 'package:irle_ref2/preview/kosakata_preview.dart';
+import 'package:irle_ref2/preview/materi_preview.dart';
+import 'package:irle_ref2/preview/status_preview.dart';
 import 'package:irle_ref2/providers/auth_provider.dart';
 // import 'package:irle_ref2/providers/kosa_kata_provider.dart';
 import 'package:irle_ref2/providers/status_provider.dart';
@@ -13,19 +16,17 @@ import 'package:irle_ref2/widgets/header_main.dart';
 import 'package:provider/provider.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
-class MainPage extends StatefulWidget {
-  // const MainPage({ Key? key }) : super(key: key);
+class MainPreview extends StatefulWidget {
+  // const MainPreview({ Key? key }) : super(key: key);
   @override
-  _MainPageState createState() => _MainPageState();
+  _MainPreviewState createState() => _MainPreviewState();
 }
 
-class _MainPageState extends State<MainPage> {
+class _MainPreviewState extends State<MainPreview> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     this.getDataStatus();
   }
-
-  final box = GetStorage();
 
   getDataStatus() async {
     //bisa diganti beberapa detik sesuai keinginan
@@ -33,16 +34,15 @@ class _MainPageState extends State<MainPage> {
     UserModel user = authProvider.user;
     // print(user.id);
     await Provider.of<StatusProvider>(context, listen: false)
-        .getStatuses(box.read('id'));
+        .getStatuses(user.id);
   }
 
   int indexPage = 0;
   // dynamic name = FlutterSession().get('token');
+  final box = GetStorage();
 
   @override
   Widget build(BuildContext context) {
-    AuthProvider authProvider = Provider.of<AuthProvider>(context);
-    UserModel user = authProvider.user;
     Widget chatButton() {
       return Container(
         margin: EdgeInsets.only(bottom: 12),
@@ -50,14 +50,13 @@ class _MainPageState extends State<MainPage> {
         child: FloatingActionButton(
           backgroundColor: primaryColor,
           onPressed: () {
-            (user == null && box.read('id') == null)
-                ? Alert(
-                        context: context,
-                        title: "Sorry!",
-                        desc:
-                            "Kamu belum bisa mengakses halaman ini sebelum login kedalam aplikasi")
-                    .show()
-                : Navigator.pushNamed(context, '/chatbot-page');
+            // print(statusLogin.toString());
+            Alert(
+                    context: context,
+                    title: "Sorry!",
+                    desc:
+                        "Kamu belum bisa mengakses halaman ini sebelum login kedalam aplikasi")
+                .show();
           },
           child: Image.asset(
             "assets/logo_chatbot.png",
@@ -109,16 +108,46 @@ class _MainPageState extends State<MainPage> {
           ]);
     }
 
+    Widget header() {
+      return Container(
+        width: double.infinity,
+        padding: EdgeInsets.only(top: 6, left: 30, right: 30),
+        height: 70,
+        color: primaryColor,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Hello! Sir",
+                    style: titleTextStyle.copyWith(
+                        fontSize: 18, fontWeight: FontWeight.w100)),
+                Text("wellcome",
+                    style: subTitleTextStyle.copyWith(
+                        fontSize: 12, fontWeight: FontWeight.w100)),
+              ],
+            ),
+            TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/sign-in');
+                },
+                child: Text("Sign In", style: subTitleTextStyle))
+          ],
+        ),
+      );
+    }
+
     Widget body() {
       switch (indexPage) {
         case 0:
-          return MateriPage();
+          return MateriPreview();
           break;
         case 1:
-          return KosaKataPage(id: box.read('id'));
+          return KosaKataPreview();
           break;
         case 2:
-          return StatusPage();
+          return StatusPreview();
           break;
         default:
       }
@@ -129,7 +158,7 @@ class _MainPageState extends State<MainPage> {
       floatingActionButton: chatButton(),
       backgroundColor: bgLight,
       body: ListView(
-        children: [HeaderMain(), body()],
+        children: [header(), body()],
       ),
     );
   }

@@ -10,15 +10,15 @@ import 'package:irle_ref2/widgets/custom_tabbar.dart';
 import 'package:provider/provider.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
-class KosaKataPage extends StatefulWidget {
-  // const KosaKataPage({ Key? key }) : super(key: key);
+class KosaKataPreview extends StatefulWidget {
+  // const KosaKataPreview({ Key? key }) : super(key: key);
   final int id;
-  KosaKataPage({this.id});
+  KosaKataPreview({this.id});
   @override
-  _KosaKataPageState createState() => _KosaKataPageState();
+  _KosaKataPreviewState createState() => _KosaKataPreviewState();
 }
 
-class _KosaKataPageState extends State<KosaKataPage> {
+class _KosaKataPreviewState extends State<KosaKataPreview> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     this.getDataMemorizingDetail();
@@ -56,20 +56,13 @@ class _KosaKataPageState extends State<KosaKataPage> {
   int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
-    var token = box.read('token');
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
     UserModel user = authProvider.user;
     KosaKataProvider _kosaKataProvider = Provider.of<KosaKataProvider>(context);
     MemorizingDetailProvider _memorizingDetail =
         Provider.of<MemorizingDetailProvider>(context);
 
-    Widget memorizedCard(
-      String verb1,
-      String verb2,
-      String verb3,
-      String translate,
-      String verbing,
-    ) {
+    Widget memorizedCard() {
       return Container(
           margin: EdgeInsets.fromLTRB(30, 0, 30, 12),
           padding: EdgeInsets.fromLTRB(30, 12, 30, 12),
@@ -86,7 +79,7 @@ class _KosaKataPageState extends State<KosaKataPage> {
                 children: [
                   Expanded(
                     child: Text(
-                      verb1,
+                      'Sing',
                       style: titleTextStyle.copyWith(color: primaryColor),
                     ),
                   ),
@@ -105,7 +98,7 @@ class _KosaKataPageState extends State<KosaKataPage> {
                       Text("verb 2 :",
                           style:
                               subTitleTextStyle.copyWith(color: Colors.black)),
-                      Text(verb2,
+                      Text('Sang',
                           style:
                               subTitleTextStyle.copyWith(color: Colors.black)),
                     ],
@@ -117,7 +110,7 @@ class _KosaKataPageState extends State<KosaKataPage> {
                       Text("verb 3 :",
                           style:
                               subTitleTextStyle.copyWith(color: Colors.black)),
-                      Text(verb3,
+                      Text('Sung',
                           style:
                               subTitleTextStyle.copyWith(color: Colors.black)),
                     ],
@@ -129,7 +122,7 @@ class _KosaKataPageState extends State<KosaKataPage> {
                       Text("verb ing :",
                           style:
                               subTitleTextStyle.copyWith(color: Colors.black)),
-                      Text(verb2,
+                      Text('Singing',
                           style:
                               subTitleTextStyle.copyWith(color: Colors.black)),
                     ],
@@ -141,7 +134,7 @@ class _KosaKataPageState extends State<KosaKataPage> {
                       Text("Translate :",
                           style:
                               subTitleTextStyle.copyWith(color: Colors.black)),
-                      Text(translate,
+                      Text('bernyanyi',
                           style:
                               subTitleTextStyle.copyWith(color: Colors.black)),
                     ],
@@ -241,15 +234,13 @@ class _KosaKataPageState extends State<KosaKataPage> {
                           print(id.toString());
                           setState(() {
                             // _memorizingDetail.add(token, userId, kosakataId);
-                            (user == null && box.getValues() == null)
-                                ? Alert(
-                                        context: context,
-                                        title: "!Sorry",
-                                        desc:
-                                            "Kamu belum bisa mengakses halaman ini sebelum login kedalam aplikasi")
-                                    .show()
-                                : MemorizingDetailProvider()
-                                    .add(token, widget.id, kosakataId);
+                            Alert(
+                                    context: context,
+                                    title: "!Sorry",
+                                    desc:
+                                        "Kamu belum bisa mengakses halaman ini sebelum login kedalam aplikasi")
+                                .show();
+
                             // print(kosakataId);
                           });
                         },
@@ -283,47 +274,65 @@ class _KosaKataPageState extends State<KosaKataPage> {
             Widget body = (selectedIndex == 0)
                 ? Column(
                     children: _kosaKataProvider.vocabullaries
-                        .map((vocabullary) => (user == null &&
-                                box.read('id') == null)
-                            ? Column(
-                                children: [
-                                  cardWords(null, null, null, "Sing", "Sang",
-                                      "Sung", "bernyani", "Singing", null),
-                                  cardWords(null, null, null, "dfsdf", "dfsdf",
-                                      "dfsdf", "dfsdf", "dfsdf", null),
-                                  cardWords(null, null, null, "dfsdf", "dfsdf",
-                                      "dfsdf", "dfsdf", "dfsdf", null),
-                                  cardWords(null, null, null, "dfsdf", "dfsdf",
-                                      "dfsdf", "dfsdf", "dfsdf", null),
-                                ],
-                              )
-                            : cardWords(
-                                (user != null) ? user.token : box.read('token'),
-                                (user != null) ? user.id : box.read('id'),
-                                vocabullary.id,
-                                vocabullary.verb1,
-                                vocabullary.verb2,
-                                vocabullary.verb3,
-                                vocabullary.translate,
-                                vocabullary.verbing,
-                                vocabullary.id))
+                        .map((vocabullary) =>
+                            (user == null && box.read('id') == null)
+                                ? Column(
+                                    children: [
+                                      cardWords(
+                                          null,
+                                          null,
+                                          null,
+                                          "Sing",
+                                          "Sang",
+                                          "Sung",
+                                          "bernyani",
+                                          "Singing",
+                                          null),
+                                      cardWords(
+                                          null,
+                                          null,
+                                          null,
+                                          "dfsdf",
+                                          "dfsdf",
+                                          "dfsdf",
+                                          "dfsdf",
+                                          "dfsdf",
+                                          null),
+                                      cardWords(
+                                          null,
+                                          null,
+                                          null,
+                                          "dfsdf",
+                                          "dfsdf",
+                                          "dfsdf",
+                                          "dfsdf",
+                                          "dfsdf",
+                                          null),
+                                      cardWords(
+                                          null,
+                                          null,
+                                          null,
+                                          "dfsdf",
+                                          "dfsdf",
+                                          "dfsdf",
+                                          "dfsdf",
+                                          "dfsdf",
+                                          null),
+                                    ],
+                                  )
+                                : cardWords(
+                                    user.token,
+                                    user.id,
+                                    vocabullary.id,
+                                    vocabullary.verb1,
+                                    vocabullary.verb2,
+                                    vocabullary.verb3,
+                                    vocabullary.translate,
+                                    vocabullary.verbing,
+                                    vocabullary.id))
                         .toList(),
                   )
-                : Column(
-                    children: _memorizingDetail.memorizingDetails
-                        .map((memorizingDetail) =>
-                            (box.read('id') == null && user == null)
-                                ? Text("Kamu belum memiliki kosa kata")
-                                : memorizedCard(
-                                    // memorizingDetail.verb1,
-                                    memorizingDetail.verb1,
-                                    memorizingDetail.verb2,
-                                    memorizingDetail.verb3,
-                                    memorizingDetail.translate,
-                                    memorizingDetail.verbing,
-                                  ))
-                        .toList(),
-                  );
+                : Column(children: [memorizedCard()]);
 
             return Center(
               child: body,

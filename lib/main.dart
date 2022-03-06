@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:irle_ref2/pages/chabot_page.dart';
 // import 'package:irle_ref2/pages/detail_materi_page.dart';
 import 'package:irle_ref2/pages/home/main_page.dart';
@@ -12,9 +13,11 @@ import 'package:irle_ref2/providers/kuis_provider.dart';
 import 'package:irle_ref2/providers/materi_provider.dart';
 import 'package:irle_ref2/providers/memorizing_detail_provider.dart';
 import 'package:irle_ref2/providers/status_provider.dart';
+import 'package:irle_ref2/providers/submenu_provider.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+  await GetStorage.init();
   runApp(MyApp());
 }
 
@@ -30,6 +33,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => KosaKataProvider()),
         ChangeNotifierProvider(create: (context) => MemorizingDetailProvider()),
         ChangeNotifierProvider(create: (context) => StatusProvider()),
+        ChangeNotifierProvider(create: (context) => SubmenuProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
