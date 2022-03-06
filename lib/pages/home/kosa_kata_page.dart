@@ -153,8 +153,17 @@ class _KosaKataPageState extends State<KosaKataPage> {
           ));
     }
 
-    Widget cardWords(String token, int userId, int kosakataId, String verb1,
-        String verb2, String verb3, String translate, String verbing, int id) {
+    Widget cardWords(
+        String token,
+        int userId,
+        int kosakataId,
+        String regulerKategori,
+        String verb1,
+        String verb2,
+        String verb3,
+        String translate,
+        String verbing,
+        int id) {
       return Container(
           margin: EdgeInsets.fromLTRB(30, 0, 30, 12),
           padding: EdgeInsets.fromLTRB(30, 12, 30, 12),
@@ -175,8 +184,11 @@ class _KosaKataPageState extends State<KosaKataPage> {
                       style: titleTextStyle.copyWith(color: primaryColor),
                     ),
                   ),
-                  Text("reguler",
-                      style: subTitleTextStyle.copyWith(color: darkGrey))
+                  Text(regulerKategori,
+                      style: subTitleTextStyle.copyWith(
+                          color: (regulerKategori == "reguler")
+                              ? primaryColor
+                              : blueColor))
                 ],
               ),
               SizedBox(height: 12),
@@ -214,7 +226,7 @@ class _KosaKataPageState extends State<KosaKataPage> {
                       Text("verb ing :",
                           style:
                               subTitleTextStyle.copyWith(color: Colors.black)),
-                      Text(verb2,
+                      Text(verbing,
                           style:
                               subTitleTextStyle.copyWith(color: Colors.black)),
                     ],
@@ -287,20 +299,24 @@ class _KosaKataPageState extends State<KosaKataPage> {
                                 box.read('id') == null)
                             ? Column(
                                 children: [
-                                  cardWords(null, null, null, "Sing", "Sang",
-                                      "Sung", "bernyani", "Singing", null),
-                                  cardWords(null, null, null, "dfsdf", "dfsdf",
-                                      "dfsdf", "dfsdf", "dfsdf", null),
-                                  cardWords(null, null, null, "dfsdf", "dfsdf",
-                                      "dfsdf", "dfsdf", "dfsdf", null),
-                                  cardWords(null, null, null, "dfsdf", "dfsdf",
-                                      "dfsdf", "dfsdf", "dfsdf", null),
+                                  cardWords(
+                                      null,
+                                      null,
+                                      null,
+                                      "reguler",
+                                      "Sing",
+                                      "Sang",
+                                      "Sung",
+                                      "bernyani",
+                                      "Singing",
+                                      null),
                                 ],
                               )
                             : cardWords(
                                 (user != null) ? user.token : box.read('token'),
                                 (user != null) ? user.id : box.read('id'),
                                 vocabullary.id,
+                                vocabullary.regulerKategori,
                                 vocabullary.verb1,
                                 vocabullary.verb2,
                                 vocabullary.verb3,

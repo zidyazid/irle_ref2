@@ -1,5 +1,6 @@
 class KosaKataModel {
   int id;
+  String regulerKategori;
   String verb1;
   String verb2;
   String verb3;
@@ -10,6 +11,7 @@ class KosaKataModel {
 
   KosaKataModel(
       {this.id,
+      this.regulerKategori,
       this.verb1,
       this.verb2,
       this.verb3,
@@ -19,6 +21,7 @@ class KosaKataModel {
 
   KosaKataModel.fromJson(Map<String, dynamic> json) {
     id = json["id"];
+    regulerKategori = json["reguler_kategori"];
     verb1 = json["verb1"];
     verb2 = json["verb2"];
     verb3 = json["verb3"];
@@ -35,6 +38,7 @@ class KosaKataModel {
   Map<String, dynamic> toJson() {
     return {
       'id': id,
+      'reguler_kategori': regulerKategori,
       'verb1': verb1,
       'verb2': verb2,
       'verb3': verb3,
