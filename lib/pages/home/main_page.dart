@@ -29,8 +29,8 @@ class _MainPageState extends State<MainPage> {
 
   getDataStatus() async {
     //bisa diganti beberapa detik sesuai keinginan
-    AuthProvider authProvider = Provider.of<AuthProvider>(context);
-    UserModel user = authProvider.user;
+    // AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    // UserModel user = authProvider.user;
     // print(user.id);
     await Provider.of<StatusProvider>(context, listen: false)
         .getStatuses(box.read('id'));
@@ -43,6 +43,7 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
     UserModel user = authProvider.user;
+    // box.write('image', user.profilePhotoUrl);
     Widget chatButton() {
       return Container(
         margin: EdgeInsets.only(bottom: 12),

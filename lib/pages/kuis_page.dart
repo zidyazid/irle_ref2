@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:irle_ref2/models/user_model.dart';
 import 'package:irle_ref2/pages/score_kuis.dart';
 import 'package:irle_ref2/providers/auth_provider.dart';
@@ -70,6 +71,7 @@ class _KuisPageState extends State<KuisPage> {
     }
 
     Widget hasilKuis(double score) {
+      final box = GetStorage();
       return Container(
         width: double.infinity,
         height: MediaQuery.of(context).size.height,
@@ -99,8 +101,12 @@ class _KuisPageState extends State<KuisPage> {
                     style: TextButton.styleFrom(backgroundColor: whiteColor),
                     onPressed: () async {
                       print(widget.id);
-                      await StatusProvider().add(user.token, widget.materiId,
-                          score.toInt(), user.id, widget.id);
+                      await StatusProvider().add(
+                          box.read('token'),
+                          widget.materiId,
+                          score.toInt(),
+                          box.read('id'),
+                          widget.id);
                       Navigator.pushNamedAndRemoveUntil(
                           context, '/main-page', (route) => false);
                     },
@@ -182,7 +188,8 @@ class _KuisPageState extends State<KuisPage> {
                             var jawabanUser =
                                 jawabanController.text.toLowerCase();
                             if (jawabanUser ==
-                                kuisProvider.kuises[index].jawaban) {
+                                kuisProvider.kuises[index].jawaban
+                                    .toLowerCase()) {
                               setState(() {
                                 if (index < kuisProvider.kuises.length) {
                                   score = score + 25.0;

@@ -56,7 +56,7 @@ class _StatusPageState extends State<StatusPage> {
                 duration: Duration(milliseconds: 500),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(24),
-                    color: Colors.green[400]),
+                    color: (percentage < 50) ? lightRed : Colors.green[400]),
               ),
             )
           ],
@@ -151,19 +151,19 @@ class _StatusPageState extends State<StatusPage> {
                 children: [
                   Column(
                     children: [
-                      // Container(
-                      //     child: Center(
-                      //       child: ClipRRect(
-                      //         borderRadius: BorderRadius.circular(24),
-                      //         child: Image(
-                      //           image: NetworkImage(user.profilePhotoUrl),
-                      //           fit: BoxFit.fill,
-                      //         ),
-                      //       ),
-                      //     ),
-                      //     decoration: BoxDecoration(
-                      //       borderRadius: BorderRadius.circular(12),
-                      //     )),
+                      Container(
+                          child: Center(
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(24),
+                              child: Image(
+                                image: NetworkImage(box.read('image')),
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                          ),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                          )),
                       SizedBox(
                         height: 12,
                       ),
@@ -173,7 +173,7 @@ class _StatusPageState extends State<StatusPage> {
                       // SizedBox(
                       //   height: 3,
                       // ),
-                      Text(box.read('name'),
+                      Text(box.read('email'),
                           style: subTitleTextStyle.copyWith(
                               color: Colors.black38)),
                     ],

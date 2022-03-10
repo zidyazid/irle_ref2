@@ -41,8 +41,10 @@ class AuthService {
       box.write('id', user.id);
       box.write('email', user.email);
       box.write('token', user.token);
+      box.write('image', user.profilePhotoUrl);
 
-      print('data user : $box');
+      // print('data user : $image');
+      // print(user.profilePhotoUrl);
 
       print(response.body);
       return user;
@@ -77,6 +79,7 @@ class AuthService {
       box.write('id', user.id);
       box.write('email', user.email);
       box.write('token', user.token);
+      box.write('image', user.profilePhotoUrl);
 
       print('data user : $box');
       // print('data user : ' + box.read('name'));
