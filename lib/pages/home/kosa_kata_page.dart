@@ -26,13 +26,14 @@ class _KosaKataPageState extends State<KosaKataPage> {
 
   getDataMemorizingDetail() async {
     // final box = GetStorage();
-    // int id = box.read('id')
+    // int id = box.read('id');
     // AuthProvider authProvider = Provider.of<AuthProvider>(context);
     // UserModel user = authProvider.user;
     // print(box.read('id'));
-    // print(user.id);
+    print(widget.id);
     await Provider.of<MemorizingDetailProvider>(context, listen: false)
         .getMemorizingDetail(widget.id);
+    await Provider.of<KosaKataProvider>(context, listen: false).getKosaKata();
     // box.read('id') != null
     //     ? await Provider.of<MemorizingDetailProvider>(context, listen: false)
     //         .getMemorizingDetail(box.read('id'))
@@ -247,25 +248,27 @@ class _KosaKataPageState extends State<KosaKataPage> {
                   Container(
                     width: double.infinity,
                     child: TextButton(
-                        style: TextButton.styleFrom(
-                            backgroundColor: whiteColor, elevation: 8.0),
-                        onPressed: () {
-                          print(id.toString());
-                          setState(() {
-                            // _memorizingDetail.add(token, userId, kosakataId);
-                            (user == null && box.getValues() == null)
-                                ? Alert(
-                                        context: context,
-                                        title: "!Sorry",
-                                        desc:
-                                            "Kamu belum bisa mengakses halaman ini sebelum login kedalam aplikasi")
-                                    .show()
-                                : MemorizingDetailProvider()
-                                    .add(token, widget.id, kosakataId);
-                            // print(kosakataId);
-                          });
-                        },
-                        child: Text("+ Telah dihapal")),
+                      style: TextButton.styleFrom(backgroundColor: blueColor),
+                      onPressed: () {
+                        print(id.toString());
+                        setState(() {
+                          // _memorizingDetail.add(token, userId, kosakataId);
+                          (user == null && box.getValues() == null)
+                              ? Alert(
+                                      context: context,
+                                      title: "!Sorry",
+                                      desc:
+                                          "Kamu belum bisa mengakses halaman ini sebelum login kedalam aplikasi")
+                                  .show()
+                              : MemorizingDetailProvider()
+                                  .add(token, widget.id, kosakataId);
+                          // print(kosakataId);
+                        });
+                      },
+                      child: Text("+ Telah dihapal",
+                          style: textStyle1.copyWith(
+                              color: whiteColor, fontSize: 14)),
+                    ),
                   )
                 ],
               ),
