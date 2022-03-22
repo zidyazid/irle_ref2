@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dialogflow/dialogflow_v2.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:irle_ref2/providers/auth_provider.dart';
 import 'package:irle_ref2/theme.dart';
 import 'package:provider/provider.dart';
@@ -187,6 +188,7 @@ class ChatMessage extends StatelessWidget {
 
   List<Widget> myMessage(context) {
     AuthProvider userProvider = Provider.of<AuthProvider>(context);
+    GetStorage box = GetStorage();
     return <Widget>[
       Expanded(
         child: Column(
@@ -222,7 +224,8 @@ class ChatMessage extends StatelessWidget {
             child: ClipRRect(
           borderRadius: BorderRadius.circular(100),
           child: Image.network(
-            userProvider.user.profilePhotoUrl,
+            // userProvider.user.profilePhotoUrl,
+            box.read('image'),
           ),
         )),
       ),

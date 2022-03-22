@@ -192,7 +192,7 @@ class _KuisPageState extends State<KuisPage> {
                                     .toLowerCase()) {
                               setState(() {
                                 if (index < kuisProvider.kuises.length) {
-                                  score = score + 25.0;
+                                  score = score + 20.0;
                                   AlertDialog alertTrue = AlertDialog(
                                     content: Container(
                                       width: double.infinity,
