@@ -27,7 +27,7 @@ class _MateriTileState extends State<MateriTile> {
       onTap: () {
         print('judul materi adalah ' + widget.judul);
         print(_submenuProvider.getSubmenus(widget.id));
-        Timer(Duration(seconds: 5), () {
+        Timer(Duration(seconds: 2), () {
           Navigator.push(
               context,
               MaterialPageRoute(

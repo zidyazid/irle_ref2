@@ -48,6 +48,7 @@ class _SubmenuPageState extends State<SubmenuPage> {
       return GestureDetector(
         onTap: () {
           print(widget.id);
+
           (user == null && box.read('id') == null)
               ? Alert(
                       context: context,

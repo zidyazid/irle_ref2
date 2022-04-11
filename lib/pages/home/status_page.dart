@@ -51,8 +51,7 @@ class _StatusPageState extends State<StatusPage> {
               borderRadius: BorderRadius.circular(24),
               child: AnimatedContainer(
                 height: 10,
-                width:
-                    (MediaQuery.of(context).size.width / 4 - 50) + percentage,
+                width: (MediaQuery.of(context).size.width / 3) + percentage,
                 duration: Duration(milliseconds: 500),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(24),

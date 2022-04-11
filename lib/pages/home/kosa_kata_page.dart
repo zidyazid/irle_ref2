@@ -1,4 +1,6 @@
 // import 'package:dropdown_button2/dropdown_button2.dart';
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:irle_ref2/models/user_model.dart';
@@ -9,11 +11,12 @@ import 'package:irle_ref2/theme.dart';
 import 'package:irle_ref2/widgets/custom_tabbar.dart';
 import 'package:provider/provider.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class KosaKataPage extends StatefulWidget {
   // const KosaKataPage({ Key? key }) : super(key: key);
-  final int id;
-  KosaKataPage({this.id});
+
   @override
   _KosaKataPageState createState() => _KosaKataPageState();
 }
@@ -25,20 +28,31 @@ class _KosaKataPageState extends State<KosaKataPage> {
   }
 
   getDataMemorizingDetail() async {
-    // final box = GetStorage();
-    // int id = box.read('id');
-    // AuthProvider authProvider = Provider.of<AuthProvider>(context);
-    // UserModel user = authProvider.user;
-    // print(box.read('id'));
-    print(widget.id);
-    await Provider.of<MemorizingDetailProvider>(context, listen: false)
-        .getMemorizingDetail(widget.id);
     await Provider.of<KosaKataProvider>(context, listen: false).getKosaKata();
-    // box.read('id') != null
-    //     ? await Provider.of<MemorizingDetailProvider>(context, listen: false)
-    //         .getMemorizingDetail(box.read('id'))
-    //     : await Provider.of<MemorizingDetailProvider>(context, listen: false)
-    //         .getMemorizingDetail(user.id);
+    await Provider.of<MemorizingDetailProvider>(context, listen: false)
+        .getMemorizingDetail(box.read('id'));
+    // setState(() {
+    //   selectedIndex = 1;
+    //   // });
+    // });
+  }
+
+  getData(token, kosakataId) async {
+    var memorized =
+        await MemorizingDetailProvider().add(token, box.read('id'), kosakataId);
+    await Provider.of<KosaKataProvider>(context, listen: false).getKosaKata();
+    await Provider.of<MemorizingDetailProvider>(context, listen: false)
+        .getMemorizingDetail(box.read('id'));
+    print(memorized);
+    if (memorized == true) {
+      showTopSnackBar(context,
+          CustomSnackBar.success(message: 'Yeay! Kosa kata berhasil dihapal'));
+    } else {
+      showTopSnackBar(
+          context,
+          CustomSnackBar.error(
+              message: 'Ooops! Kata tersebut telah dihapal sebelumnya'));
+    }
   }
 
   String dropdownvalue = 'Item 1';
@@ -57,7 +71,7 @@ class _KosaKataPageState extends State<KosaKataPage> {
   int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
-    var token = box.read('token');
+    // var token = box.read('token');
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
     UserModel user = authProvider.user;
     KosaKataProvider _kosaKataProvider = Provider.of<KosaKataProvider>(context);
@@ -253,6 +267,12 @@ class _KosaKataPageState extends State<KosaKataPage> {
                         print(id.toString());
                         setState(() {
                           // _memorizingDetail.add(token, userId, kosakataId);
+
+                          // print(kosakataId);
+                          //  Timer(Duration(seconds: 3), () {
+                          // selectedIndex = 1;
+                          // });
+                          // Timer(Duration(seconds: 5), () {
                           (user == null && box.getValues() == null)
                               ? Alert(
                                       context: context,
@@ -260,10 +280,12 @@ class _KosaKataPageState extends State<KosaKataPage> {
                                       desc:
                                           "Kamu belum bisa mengakses halaman ini sebelum login kedalam aplikasi")
                                   .show()
-                              : MemorizingDetailProvider()
-                                  .add(token, widget.id, kosakataId);
-                          // print(kosakataId);
+                              : getData(token, kosakataId);
                         });
+
+                        // Timer(Duration(milliseconds: 2), () {
+                        //   selectedIndex = 1;
+                        // });
                       },
                       child: Text("+ Telah dihapal",
                           style: textStyle1.copyWith(
@@ -287,6 +309,8 @@ class _KosaKataPageState extends State<KosaKataPage> {
             onTap: (index) {
               setState(() {
                 selectedIndex = index;
+
+                print(selectedIndex);
                 print(box.read('id'));
                 print(_memorizingDetail);
               });

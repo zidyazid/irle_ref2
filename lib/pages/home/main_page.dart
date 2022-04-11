@@ -6,6 +6,8 @@ import 'package:irle_ref2/pages/home/kosa_kata_page.dart';
 import 'package:irle_ref2/pages/home/materi_page.dart';
 import 'package:irle_ref2/pages/home/status_page.dart';
 import 'package:irle_ref2/providers/auth_provider.dart';
+import 'package:irle_ref2/providers/kosa_kata_provider.dart';
+import 'package:irle_ref2/providers/memorizing_detail_provider.dart';
 // import 'package:irle_ref2/providers/kosa_kata_provider.dart';
 import 'package:irle_ref2/providers/status_provider.dart';
 import 'package:irle_ref2/theme.dart';
@@ -34,6 +36,9 @@ class _MainPageState extends State<MainPage> {
     // print(user.id);
     await Provider.of<StatusProvider>(context, listen: false)
         .getStatuses(box.read('id'));
+    await Provider.of<MemorizingDetailProvider>(context, listen: false)
+        .getMemorizingDetail(box.read('id'));
+    await Provider.of<KosaKataProvider>(context, listen: false).getKosaKata();
   }
 
   int indexPage = 0;
@@ -116,7 +121,7 @@ class _MainPageState extends State<MainPage> {
           return MateriPage();
           break;
         case 1:
-          return KosaKataPage(id: box.read('id'));
+          return KosaKataPage();
           break;
         case 2:
           return StatusPage();

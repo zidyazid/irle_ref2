@@ -116,7 +116,7 @@ class _ChabotPage extends State<ChabotPage> {
                                     bottomRight: Radius.circular(12),
                                     bottomLeft: Radius.circular(12))),
                             child: Text(
-                                "hello! My name is irle, i will be your friend to practice your english, i have some interesting topic like : \n 1. food \n 2. hobbies \n 3. daily activity"),
+                                "hello! My name is irle, i will be your friend to practice your english, you can say hi or lets start to talk :D"),
                           ),
                         ],
                       ),

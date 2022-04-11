@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:irle_ref2/models/kuis_model.dart';
 import 'package:irle_ref2/pages/kuis_page.dart';
+import 'package:irle_ref2/pages/undefined_kuis.dart';
 import 'package:irle_ref2/providers/kuis_provider.dart';
 import 'package:irle_ref2/theme.dart';
 import 'package:provider/provider.dart';
@@ -36,6 +37,7 @@ class _DetailMateriPageState extends State<DetailMateriPage> {
   @override
   Widget build(BuildContext context) {
     KuisProvider kuisProvider = Provider.of<KuisProvider>(context);
+    // KuisProvider _kuis = Provider.of<KuisProvider>(context).getKuises(widget.id) as KuisProvider;
 
     Widget header() {
       return AppBar(
@@ -49,6 +51,7 @@ class _DetailMateriPageState extends State<DetailMateriPage> {
     }
 
     Widget content() {
+      // int notId = widget.id.toInt() + 4;
       return ListView(padding: EdgeInsets.all(24), children: [
         Expanded(
           child: Column(
@@ -70,34 +73,44 @@ class _DetailMateriPageState extends State<DetailMateriPage> {
               // NOTE: STRUKTUR POSITIF
 
               SizedBox(height: 24),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  TextButton(
-                      style: TextButton.styleFrom(
-                          backgroundColor: blueColor, elevation: 1.0),
-                      onPressed: () {
-                        // var kuis = kuisProvider.getKuises(id.toString());
-                        // print(kuis);
-                        print(widget.id);
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => KuisPage(
-                                      id: widget.id,
-                                      jumlahPertanyaan:
-                                          kuisProvider.kuises.length,
-                                      materiId: widget.materiId,
-                                    )));
-                        print('jumlah kuis = ' +
-                            kuisProvider.kuises.length.toString());
-                      },
-                      child: Text(
-                        "Kuis",
-                        style: subTitleTextStyle.copyWith(color: whiteColor),
-                      )),
-                ],
-              )
+              (widget.judul == "Penjelasan Dasar")
+                  ? SizedBox(height: 24)
+                  : Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        TextButton(
+                            style: TextButton.styleFrom(
+                                backgroundColor: blueColor, elevation: 1.0),
+                            onPressed: () {
+                              // var kuis = kuisProvider.getKuises(id.toString());
+                              // print(kuis);
+                              print(widget.id);
+                              print("id kuis =" + widget.id.toString());
+                              (kuisProvider.kuises.length.toInt() == 0)
+                                  ? Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              UndefinedKuis()))
+                                  : Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => KuisPage(
+                                                id: widget.id,
+                                                jumlahPertanyaan:
+                                                    kuisProvider.kuises.length,
+                                                materiId: widget.materiId,
+                                              )));
+
+                              print(kuisProvider.kuises.length.toInt());
+                            },
+                            child: Text(
+                              "Kuis",
+                              style:
+                                  subTitleTextStyle.copyWith(color: whiteColor),
+                            )),
+                      ],
+                    )
             ],
           ),
         ),
