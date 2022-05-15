@@ -276,7 +276,7 @@ class _KosaKataPageState extends State<KosaKataPage> {
                           (user == null && box.getValues() == null)
                               ? Alert(
                                       context: context,
-                                      title: "!Sorry",
+                                      title: "Sorry!",
                                       desc:
                                           "Kamu belum bisa mengakses halaman ini sebelum login kedalam aplikasi")
                                   .show()

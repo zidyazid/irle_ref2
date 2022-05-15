@@ -120,10 +120,10 @@ class _MainPreviewState extends State<MainPreview> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Hello! Sir",
+                Text("Hai!",
                     style: titleTextStyle.copyWith(
                         fontSize: 18, fontWeight: FontWeight.w100)),
-                Text("wellcome",
+                Text("Selamat Datang",
                     style: subTitleTextStyle.copyWith(
                         fontSize: 12, fontWeight: FontWeight.w100)),
               ],
@@ -132,7 +132,7 @@ class _MainPreviewState extends State<MainPreview> {
                 onPressed: () {
                   Navigator.pushNamed(context, '/sign-in');
                 },
-                child: Text("Sign In", style: subTitleTextStyle))
+                child: Text("Masuk", style: subTitleTextStyle))
           ],
         ),
       );

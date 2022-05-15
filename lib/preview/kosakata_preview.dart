@@ -207,7 +207,7 @@ class _KosaKataPreviewState extends State<KosaKataPreview> {
                       Text("verb ing :",
                           style:
                               subTitleTextStyle.copyWith(color: Colors.black)),
-                      Text(verb2,
+                      Text(verbing,
                           style:
                               subTitleTextStyle.copyWith(color: Colors.black)),
                     ],
@@ -228,15 +228,14 @@ class _KosaKataPreviewState extends State<KosaKataPreview> {
                   Container(
                     width: double.infinity,
                     child: TextButton(
-                        style: TextButton.styleFrom(
-                            backgroundColor: whiteColor, elevation: 8.0),
+                        style: TextButton.styleFrom(backgroundColor: blueColor),
                         onPressed: () {
                           print(id.toString());
                           setState(() {
                             // _memorizingDetail.add(token, userId, kosakataId);
                             Alert(
                                     context: context,
-                                    title: "!Sorry",
+                                    title: "Sorry!",
                                     desc:
                                         "Kamu belum bisa mengakses halaman ini sebelum login kedalam aplikasi")
                                 .show();
@@ -244,7 +243,10 @@ class _KosaKataPreviewState extends State<KosaKataPreview> {
                             // print(kosakataId);
                           });
                         },
-                        child: Text("+ Telah dihapal")),
+                        child: Text(
+                          "+ Telah dihapal",
+                          style: textStyle1.copyWith(color: whiteColor),
+                        )),
                   )
                 ],
               ),
@@ -282,42 +284,14 @@ class _KosaKataPreviewState extends State<KosaKataPreview> {
                                           null,
                                           null,
                                           null,
-                                          "Sing",
-                                          "Sang",
-                                          "Sung",
-                                          "bernyani",
-                                          "Singing",
-                                          null),
-                                      cardWords(
-                                          null,
-                                          null,
-                                          null,
-                                          "dfsdf",
-                                          "dfsdf",
-                                          "dfsdf",
-                                          "dfsdf",
-                                          "dfsdf",
-                                          null),
-                                      cardWords(
-                                          null,
-                                          null,
-                                          null,
-                                          "dfsdf",
-                                          "dfsdf",
-                                          "dfsdf",
-                                          "dfsdf",
-                                          "dfsdf",
-                                          null),
-                                      cardWords(
-                                          null,
-                                          null,
-                                          null,
-                                          "dfsdf",
-                                          "dfsdf",
-                                          "dfsdf",
-                                          "dfsdf",
-                                          "dfsdf",
-                                          null),
+                                          vocabullary.verb1,
+                                          vocabullary.verb2,
+                                          vocabullary.verb3,
+                                          vocabullary.translate,
+                                          vocabullary.verbing,
+                                          vocabullary.id),
+                                      // cardWords(null, null, null, "eat", "ate",
+                                      //     "eaten", "makan", "eating", null),
                                     ],
                                   )
                                 : cardWords(

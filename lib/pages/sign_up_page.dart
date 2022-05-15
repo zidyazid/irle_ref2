@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:irle_ref2/providers/auth_provider.dart';
 import 'package:irle_ref2/theme.dart';
 import 'package:provider/provider.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 // import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 // import 'package:top_snackbar_flutter/tap_bounce_container.dart';
 // import 'package:top_snackbar_flutter/top_snack_bar.dart';
@@ -31,8 +33,21 @@ class _SignUpPageState extends State<SignUpPage> {
           username: usernameController.text,
           email: emailController.text,
           password: passwordController.text)) {
+        showTopSnackBar(
+          context,
+          CustomSnackBar.success(
+            message: "Registerasi Berhasil",
+          ),
+        );
         Navigator.pushNamedAndRemoveUntil(
             context, '/main-page', (route) => false);
+      } else {
+        showTopSnackBar(
+          context,
+          CustomSnackBar.error(
+            message: "Registerasi Gagal",
+          ),
+        );
       }
     }
 
@@ -49,11 +64,11 @@ class _SignUpPageState extends State<SignUpPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Sign Up",
+                "Daftar",
                 style: titleTextStyle.copyWith(fontSize: 18, color: blueColor),
               ),
               Text(
-                "Create an account to start learning",
+                "Buat sebuah akun untuk mulai belajar",
                 style: subTitleTextStyle.copyWith(color: darkGrey),
               ),
             ],
@@ -202,7 +217,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       borderRadius: BorderRadius.circular(24))),
               onPressed: handleSignUp,
               child: Text(
-                "Register",
+                "Daftar",
                 style:
                     subTitleTextStyle.copyWith(color: whiteColor, fontSize: 16),
               )));

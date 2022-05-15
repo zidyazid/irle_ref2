@@ -58,11 +58,11 @@ class _SignInPageState extends State<SignInPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Sign In",
+                "Masuk",
                 style: titleTextStyle.copyWith(fontSize: 18, color: blueColor),
               ),
               Text(
-                "Create an account to start learning",
+                "Login kedalam aplikasi untuk mulai belajar",
                 style: subTitleTextStyle.copyWith(color: darkGrey),
               ),
             ],
@@ -149,7 +149,7 @@ class _SignInPageState extends State<SignInPage> {
                     borderRadius: BorderRadius.circular(24))),
             onPressed: handleSignIn,
             child: Text(
-              "Sign In",
+              "Masuk",
               style:
                   subTitleTextStyle.copyWith(color: whiteColor, fontSize: 16),
             )),

@@ -21,15 +21,15 @@ class _OnboardingPageState extends State<OnboardingPage> {
   ];
 
   List title = [
-    'Easy to Learn',
-    'Interactive Features',
-    'Learn From Everywhere',
+    'Mudah untuk dipelajari',
+    'Belajar lebih interaktif',
+    'Waktu belajar yang tidak terikat',
   ];
 
   List subTitle = [
-    'Make learning to be easier and more fun with us',
-    'We will help you to learn with interactive',
-    'Ready to start your journey',
+    'Bersama irle belajar akan menjadi lebih mudah dan menyenangkan',
+    'Dengan fitur interaktif yang akan membantu kamu mempelajari bahasa inggris',
+    'Kamu bisa belajar dari manapun dan kapanpun yang kamu suka',
   ];
 
   @override
@@ -132,17 +132,21 @@ class _OnboardingPageState extends State<OnboardingPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text("${title[indexIndicator]}", style: titleTextStyle),
+              Text(
+                "${title[indexIndicator]}",
+                style: titleTextStyle,
+                textAlign: TextAlign.center,
+              ),
               Padding(
                 padding: const EdgeInsets.only(
-                  left: 50,
-                  right: 50,
+                  left: 30,
+                  right: 30,
                 ),
                 child: Text("${subTitle[indexIndicator]}",
                     textAlign: TextAlign.center, style: subTitleTextStyle),
               ),
               SizedBox(
-                height: 24,
+                height: 12,
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
