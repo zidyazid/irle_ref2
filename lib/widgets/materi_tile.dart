@@ -50,7 +50,7 @@ class _MateriTileState extends State<MateriTile> {
             //         overflow: TextOverflow.ellipsis, style: textStyle1)),
             Column(
               children: [
-                Image.asset('assets/circle.png', height: 22),
+                Image.asset('assets/circle.png', height: 32),
                 Image.asset(
                   'assets/line.png',
                   height: 50,
@@ -67,10 +67,10 @@ class _MateriTileState extends State<MateriTile> {
                   SizedBox(
                     height: 2,
                   ),
-                  Text(
-                    widget.judul,
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                  Text(widget.judul,
+                      overflow: TextOverflow.ellipsis,
+                      style: textStyle1.copyWith(
+                          fontSize: 18, color: Colors.grey[800])),
                   // SizedBox(
                   //   height: 3,
                   // ),

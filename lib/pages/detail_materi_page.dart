@@ -53,67 +53,67 @@ class _DetailMateriPageState extends State<DetailMateriPage> {
     Widget content() {
       // int notId = widget.id.toInt() + 4;
       return ListView(padding: EdgeInsets.all(24), children: [
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // NOTE: TITLE
-              Text(
-                widget.judul,
-                style: titleTextStyle.copyWith(color: primaryColor),
-              ),
-              SizedBox(height: 24),
-              // NOTE: ISI
-              Text(
-                widget.penjelasan,
-                style: textStyle1.copyWith(color: Colors.black),
-                textAlign: TextAlign.justify,
-              ),
-              SizedBox(height: 16),
-              // NOTE: STRUKTUR POSITIF
+        // Expanded(
+        //   child:
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // NOTE: TITLE
+            Text(
+              widget.judul,
+              style: titleTextStyle.copyWith(color: primaryColor),
+            ),
+            SizedBox(height: 24),
+            // NOTE: ISI
+            Text(
+              widget.penjelasan,
+              style: textStyle1.copyWith(color: Colors.black, fontSize: 16),
+              textAlign: TextAlign.start,
+            ),
+            SizedBox(height: 16),
+            // NOTE: STRUKTUR POSITIF
 
-              SizedBox(height: 24),
-              (widget.judul == "Penjelasan Dasar")
-                  ? SizedBox(height: 24)
-                  : Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        TextButton(
-                            style: TextButton.styleFrom(
-                                backgroundColor: blueColor, elevation: 1.0),
-                            onPressed: () {
-                              // var kuis = kuisProvider.getKuises(id.toString());
-                              // print(kuis);
-                              print(widget.id);
-                              print("id kuis =" + widget.id.toString());
-                              (kuisProvider.kuises.length.toInt() == 0)
-                                  ? Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              UndefinedKuis()))
-                                  : Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => KuisPage(
-                                                id: widget.id,
-                                                jumlahPertanyaan:
-                                                    kuisProvider.kuises.length,
-                                                materiId: widget.materiId,
-                                              )));
+            // SizedBox(height: 24),
+            (widget.judul == "Penjelasan Dasar")
+                ? SizedBox(height: 24)
+                : Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TextButton(
+                          style: TextButton.styleFrom(
+                              backgroundColor: blueColor, elevation: 1.0),
+                          onPressed: () {
+                            // var kuis = kuisProvider.getKuises(id.toString());
+                            // print(kuis);
+                            print(widget.id);
+                            print("id kuis =" + widget.id.toString());
+                            (kuisProvider.kuises.length.toInt() == 0)
+                                ? Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => UndefinedKuis()))
+                                : Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => KuisPage(
+                                              id: widget.id,
+                                              jumlahPertanyaan:
+                                                  kuisProvider.kuises.length,
+                                              materiId: widget.materiId,
+                                            )));
 
-                              print(kuisProvider.kuises.length.toInt());
-                            },
-                            child: Text(
-                              "Kuis",
-                              style:
-                                  subTitleTextStyle.copyWith(color: whiteColor),
-                            )),
-                      ],
-                    )
-            ],
-          ),
+                            print(kuisProvider.kuises.length.toInt());
+                          },
+                          child: Text(
+                            "Kuis",
+                            style:
+                                subTitleTextStyle.copyWith(color: whiteColor),
+                          )),
+                    ],
+                  )
+          ],
         ),
+        // ),
       ]);
     }
 

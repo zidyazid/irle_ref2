@@ -44,6 +44,7 @@ class _SubmenuPageState extends State<SubmenuPage> {
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
     UserModel user = authProvider.user;
     SubmenuProvider _submenuProvider = Provider.of<SubmenuProvider>(context);
+
     Widget content(String judul, int id, String penjelasan) {
       return GestureDetector(
         onTap: () {
@@ -88,7 +89,8 @@ class _SubmenuPageState extends State<SubmenuPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(judul,
-                        style: subTitleTextStyle.copyWith(color: primaryColor)),
+                        style: subTitleTextStyle.copyWith(
+                            color: primaryColor, fontSize: 22)),
                     Icon(Icons.arrow_right, size: 50, color: primaryColor)
                   ],
                 )),

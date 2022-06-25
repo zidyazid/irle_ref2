@@ -24,19 +24,19 @@ class _PertanyaanKuisState extends State<PertanyaanKuis> {
       return Column(
         children: [
           SizedBox(
-            height: 12,
+            height: 0,
           ),
           Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text(
               "Pertanyaan :",
-              style: textStyle1.copyWith(color: whiteColor),
+              style: textStyle1.copyWith(color: whiteColor, fontSize: 18),
             ),
             SizedBox(
               height: 24,
             ),
             Text(
               kuisProvider.kuises[widget.index].pertanyaan,
-              style: textStyle1.copyWith(color: whiteColor),
+              style: textStyle1.copyWith(color: whiteColor, fontSize: 18),
             ),
             SizedBox(
               height: 24,

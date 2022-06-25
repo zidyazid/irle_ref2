@@ -122,7 +122,7 @@ class _KuisPageState extends State<KuisPage> {
       return Center(
         child: Column(
           children: [
-            SizedBox(height: MediaQuery.of(context).size.height / 6),
+            SizedBox(height: MediaQuery.of(context).size.height / 10),
             Text(
               "Pertanyaan Ke :",
               style: textStyle1.copyWith(color: primaryColor),

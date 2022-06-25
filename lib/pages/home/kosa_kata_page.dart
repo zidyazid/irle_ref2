@@ -215,11 +215,15 @@ class _KosaKataPageState extends State<KosaKataPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text("verb 2 :",
-                          style:
-                              subTitleTextStyle.copyWith(color: Colors.black)),
+                          style: textStyle1.copyWith(
+                              fontSize: 16,
+                              color: Colors.grey[800],
+                              fontWeight: FontWeight.bold)),
                       Text(verb2,
-                          style:
-                              subTitleTextStyle.copyWith(color: Colors.black)),
+                          style: textStyle1.copyWith(
+                              fontSize: 16,
+                              color: Colors.grey[800],
+                              fontWeight: FontWeight.bold)),
                     ],
                   ),
                   SizedBox(height: 12),
@@ -227,11 +231,15 @@ class _KosaKataPageState extends State<KosaKataPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text("verb 3 :",
-                          style:
-                              subTitleTextStyle.copyWith(color: Colors.black)),
+                          style: textStyle1.copyWith(
+                              fontSize: 16,
+                              color: Colors.grey[800],
+                              fontWeight: FontWeight.bold)),
                       Text(verb3,
-                          style:
-                              subTitleTextStyle.copyWith(color: Colors.black)),
+                          style: textStyle1.copyWith(
+                              fontSize: 16,
+                              color: Colors.grey[800],
+                              fontWeight: FontWeight.bold)),
                     ],
                   ),
                   SizedBox(height: 12),
@@ -239,23 +247,36 @@ class _KosaKataPageState extends State<KosaKataPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text("verb ing :",
-                          style:
-                              subTitleTextStyle.copyWith(color: Colors.black)),
+                          style: textStyle1.copyWith(
+                              fontSize: 16,
+                              color: Colors.grey[800],
+                              fontWeight: FontWeight.bold)),
                       Text(verbing,
-                          style:
-                              subTitleTextStyle.copyWith(color: Colors.black)),
+                          style: textStyle1.copyWith(
+                              fontSize: 16,
+                              color: Colors.grey[800],
+                              fontWeight: FontWeight.bold)),
                     ],
                   ),
                   SizedBox(height: 12),
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text("Translate :",
-                          style:
-                              subTitleTextStyle.copyWith(color: Colors.black)),
-                      Text(translate,
-                          style:
-                              subTitleTextStyle.copyWith(color: Colors.black)),
+                          style: textStyle1.copyWith(
+                              fontSize: 16,
+                              color: Colors.grey[800],
+                              fontWeight: FontWeight.bold)),
+                      Expanded(
+                        child: Text(translate,
+                            // overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.right,
+                            style: textStyle1.copyWith(
+                                fontSize: 16,
+                                color: Colors.grey[800],
+                                fontWeight: FontWeight.bold)),
+                      ),
                     ],
                   ),
                   SizedBox(height: 12),
