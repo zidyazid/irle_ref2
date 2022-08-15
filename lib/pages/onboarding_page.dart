@@ -73,45 +73,51 @@ class _OnboardingPageState extends State<OnboardingPage> {
     }
 
     Widget onboardingIndicator() {
-      return Row(
-        children: [
-          Container(
-            margin: EdgeInsets.only(top: 30),
-            width: indexIndicator == 0 ? 20 : 5,
-            height: 5,
-            decoration: BoxDecoration(
-              color: indexIndicator == 0 ? blueColor : whiteColor,
-              borderRadius: BorderRadius.circular(5),
+      return Container(
+        // color: darkGrey,
+        padding: EdgeInsets.only(bottom: 25),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              margin: EdgeInsets.only(top: 30),
+              width: indexIndicator == 0 ? 20 : 5,
+              height: 5,
+              decoration: BoxDecoration(
+                color: indexIndicator == 0 ? blueColor : whiteColor,
+                borderRadius: BorderRadius.circular(5),
+              ),
             ),
-          ),
-          SizedBox(
-            width: 8,
-          ),
-          Container(
-            margin: EdgeInsets.only(top: 30),
-            width: indexIndicator == 1 ? 20 : 5,
-            height: 5,
-            decoration: BoxDecoration(
-              color: indexIndicator == 1 ? blueColor : whiteColor,
-              borderRadius: BorderRadius.circular(5),
+            SizedBox(
+              width: 8,
             ),
-          ),
-          SizedBox(
-            width: 8,
-          ),
-          Container(
-            margin: EdgeInsets.only(top: 30),
-            width: indexIndicator == 2 ? 20 : 5,
-            height: 5,
-            decoration: BoxDecoration(
-              color: indexIndicator == 2 ? blueColor : whiteColor,
-              borderRadius: BorderRadius.circular(5),
+            Container(
+              margin: EdgeInsets.only(top: 30),
+              width: indexIndicator == 1 ? 20 : 5,
+              height: 5,
+              decoration: BoxDecoration(
+                color: indexIndicator == 1 ? blueColor : whiteColor,
+                borderRadius: BorderRadius.circular(5),
+              ),
             ),
-          ),
-          SizedBox(
-            width: 8,
-          ),
-        ],
+            SizedBox(
+              width: 8,
+            ),
+            Container(
+              margin: EdgeInsets.only(top: 30),
+              width: indexIndicator == 2 ? 20 : 5,
+              height: 5,
+              decoration: BoxDecoration(
+                color: indexIndicator == 2 ? blueColor : whiteColor,
+                borderRadius: BorderRadius.circular(5),
+              ),
+            ),
+            SizedBox(
+              width: 8,
+            ),
+          ],
+        ),
       );
     }
 
@@ -119,7 +125,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
       return Container(
           // color: Colors.red,
           // margin: EdgeInsets.only(top: 24),
-          height: 200,
+          height: 220,
           width: double.infinity,
           padding: EdgeInsets.symmetric(
             horizontal: 30,
@@ -152,9 +158,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(children: [
-                    onboardingIndicator(),
-                  ]),
+                  // Row(children: [
+                  onboardingIndicator(),
+                  // ]),
                   TextButton(
                       style: TextButton.styleFrom(
                           padding: EdgeInsets.symmetric(

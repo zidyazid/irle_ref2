@@ -65,11 +65,13 @@ class _NoneDataMateriTileState extends State<NoneDataMateriTile> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    height: 2,
+                    height: 0,
                   ),
                   Text(
                     widget.judul,
                     overflow: TextOverflow.ellipsis,
+                    style:
+                        textStyle1.copyWith(fontSize: 16, color: Colors.black),
                   ),
                   // SizedBox(
                   //   height: 3,

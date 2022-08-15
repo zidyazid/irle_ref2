@@ -16,7 +16,7 @@ class MateriPage extends StatelessWidget {
     Widget content() {
       return Container(
         width: double.infinity,
-        color: darkGrey,
+        color: Colors.blue[50],
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           SizedBox(height: 30),
           Stack(children: [

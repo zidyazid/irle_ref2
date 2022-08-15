@@ -70,7 +70,7 @@ class _MateriTileState extends State<MateriTile> {
                   Text(widget.judul,
                       overflow: TextOverflow.ellipsis,
                       style: textStyle1.copyWith(
-                          fontSize: 18, color: Colors.grey[800])),
+                          fontSize: 16, color: Colors.grey[800])),
                   // SizedBox(
                   //   height: 3,
                   // ),
